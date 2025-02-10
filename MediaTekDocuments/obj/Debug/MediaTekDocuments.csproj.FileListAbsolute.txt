@@ -1,0 +1,5 @@
+C:\Users\andre\Source\Repos\MediaTekDocuments\MediaTekDocuments\obj\Debug\MediaTekDocuments.csproj.AssemblyReference.cache
+C:\Users\andre\Source\Repos\MediaTekDocuments\MediaTekDocuments\obj\Debug\MediaTekDocuments.Properties.Resources.resources
+C:\Users\andre\Source\Repos\MediaTekDocuments\MediaTekDocuments\obj\Debug\MediaTekDocuments.view.FrmMediatek.resources
+C:\Users\andre\Source\Repos\MediaTekDocuments\MediaTekDocuments\obj\Debug\MediaTekDocuments.csproj.GenerateResource.cache
+C:\Users\andre\Source\Repos\MediaTekDocuments\MediaTekDocuments\obj\Debug\MediaTekDocuments.csproj.CoreCompileInputs.cache
