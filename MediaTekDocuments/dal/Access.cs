@@ -7,6 +7,9 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using System.Configuration;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
+
 
 namespace MediaTekDocuments.dal
 {
@@ -37,6 +40,15 @@ namespace MediaTekDocuments.dal
         private const string POST = "POST";
         /// <summary>
         /// méthode HTTP pour update
+        /// 
+        private const string PUT = "PUT";
+        private const string DELETE = "DELETE";
+
+
+        private Dictionary<string, Genre> classeurGenres = new Dictionary<string, Genre>();
+        private Dictionary<string, Public> classeurPublics = new Dictionary<string, Public>();
+        private Dictionary<string, Rayon> classeurRayons = new Dictionary<string, Rayon>();
+
 
         /// <summary>
         /// Méthode privée pour créer un singleton
@@ -130,6 +142,361 @@ namespace MediaTekDocuments.dal
             return lesRevues;
         }
 
+        //en construction
+        public bool AjouterLivreDvD(object livreDvd)
+        {
+            //effectuer une requete API de POST dans la table livredvd avec id
+            try
+            {
+                // Sélectionner uniquement les champs requis
+                var docDict = JObject.FromObject(livreDvd);
+
+                Console.WriteLine("Contenu de document : " + JsonConvert.SerializeObject(livreDvd, Formatting.Indented));
+
+
+                var livreDvdFiltré = new
+                {
+                    id = docDict.ContainsKey("Id") ? docDict["Id"]?.ToString() : null,
+                };
+
+
+                string jsonPayload = JsonConvert.SerializeObject(
+             livreDvdFiltré,
+                new Newtonsoft.Json.JsonSerializerSettings
+                {
+                    ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
+                }
+                );
+
+
+                // Encapsuler dans "champs=" et encoder en application/x-www-form-urlencoded
+                string formEncodedPayload = $"champs={Uri.EscapeDataString(jsonPayload)}";
+
+                // Log du format envoyé
+                Console.WriteLine("Payload encodé envoyé : " + formEncodedPayload);
+
+                // Envoyer la requête en POST avec application/x-www-form-urlencoded
+                List<Document> liste = TraitementRecup<Document>(POST, "livres_dvd", formEncodedPayload);
+
+                if (liste == null)
+                {
+                    Console.WriteLine("Erreur : La liste retournée par l'API est null.");
+                    return false;
+                }
+
+
+                // Log de la réponse API
+                Console.WriteLine($"Réponse API: {liste}");
+
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erreur lors de l'ajout du document : " + ex.Message);
+                return false;
+            }
+        }
+
+        public bool AjouterRevue(object revue)
+        {
+            //effectuer une requete API de POST dans la table livre avec id, isbn, auteur et collection
+
+            try
+            {
+                // Sélectionner uniquement les champs requis
+                var docDict = JObject.FromObject(revue);
+
+                Console.WriteLine("Contenu de document : " + JsonConvert.SerializeObject(revue, Formatting.Indented));
+
+
+                var revueFiltré = new
+                {
+                    id = docDict.ContainsKey("Id") ? docDict["Id"]?.ToString() : null,
+                    periodicite = docDict.ContainsKey("Periodicite") ? docDict["Periodicite"]?.ToString() : null, // MAJUSCULE CORRIGÉE
+                    delaiMiseADispo = docDict.ContainsKey("DelaiMiseADispo") && int.TryParse(docDict["DelaiMiseADispo"]?.ToString(), out int result) ? result : 0 // MAJUSCULE CORRIGÉE
+
+                };
+
+
+                string jsonPayload = JsonConvert.SerializeObject(
+             revueFiltré,
+                new Newtonsoft.Json.JsonSerializerSettings
+                {
+                    ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
+                }
+                );
+
+
+                // Encapsuler dans "champs=" et encoder en application/x-www-form-urlencoded
+                string formEncodedPayload = $"champs={Uri.EscapeDataString(jsonPayload)}";
+
+                // Log du format envoyé
+                Console.WriteLine("Payload encodé envoyé : " + formEncodedPayload);
+
+                // Envoyer la requête en POST avec application/x-www-form-urlencoded
+                List<Document> liste = TraitementRecup<Document>(POST, "revue", formEncodedPayload);
+
+                if (liste == null)
+                {
+                    Console.WriteLine("Erreur : La liste retournée par l'API est null.");
+                    return false;
+                }
+
+
+                // Log de la réponse API
+                Console.WriteLine($"Réponse API: {liste}");
+
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erreur lors de l'ajout du document : " + ex.Message);
+                return false;
+            }
+
+
+            return true;
+        }
+
+        public bool AjouterLivre(object livre)
+        {
+            //effectuer une requete API de POST dans la table livre avec id, isbn, auteur et collection
+
+            try
+            {
+                // Sélectionner uniquement les champs requis
+                var docDict = JObject.FromObject(livre);
+
+                Console.WriteLine("Contenu de document : " + JsonConvert.SerializeObject(livre, Formatting.Indented));
+
+
+                var livreFiltré = new
+                {
+                    id = docDict.ContainsKey("Id") ? docDict["Id"]?.ToString() : null,
+                    isbn = docDict.ContainsKey("Isbn") ? docDict["Isbn"]?.ToString() : null,
+                    auteur = docDict.ContainsKey("Auteur") ? docDict["Auteur"]?.ToString() : null,
+                    collection = docDict.ContainsKey("Collection") ? docDict["Collection"]?.ToString() : null
+                };
+
+
+                string jsonPayload = JsonConvert.SerializeObject(
+             livreFiltré,
+                new Newtonsoft.Json.JsonSerializerSettings
+                {
+                    ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
+                }
+                );
+
+
+                // Encapsuler dans "champs=" et encoder en application/x-www-form-urlencoded
+                string formEncodedPayload = $"champs={Uri.EscapeDataString(jsonPayload)}";
+
+                // Log du format envoyé
+                Console.WriteLine("Payload encodé envoyé : " + formEncodedPayload);
+
+                // Envoyer la requête en POST avec application/x-www-form-urlencoded
+                List<Document> liste = TraitementRecup<Document>(POST, "livre", formEncodedPayload);
+
+                if (liste == null)
+                {
+                    Console.WriteLine("Erreur : La liste retournée par l'API est null.");
+                    return false;
+                }
+
+
+                // Log de la réponse API
+                Console.WriteLine($"Réponse API: {liste}");
+
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erreur lors de l'ajout du document : " + ex.Message);
+                return false;
+            }
+
+
+            return true;
+        }
+
+        public bool AjouterDocument(object document)
+        {
+            try
+            {
+                // Sélectionner uniquement les champs requis
+                var docDict = JObject.FromObject(document);
+
+                Console.WriteLine("Contenu de document : " + JsonConvert.SerializeObject(document, Formatting.Indented));
+
+
+                var documentFiltré = new
+                {
+                    id = docDict.ContainsKey("Id") ? docDict["Id"]?.ToString() : null,
+                    titre = docDict.ContainsKey("Titre") ? docDict["Titre"]?.ToString() : null,
+                    idRayon = docDict.ContainsKey("IdRayon") ? docDict["IdRayon"]?.ToString() : null,
+                    idPublic = docDict.ContainsKey("IdPublic") ? docDict["IdPublic"]?.ToString() : null,
+                    idGenre = docDict.ContainsKey("IdGenre") ? docDict["IdGenre"]?.ToString() : null,
+                    image = docDict.ContainsKey("Image") ? docDict["Image"]?.ToString() : null
+                };
+
+
+                string jsonPayload = JsonConvert.SerializeObject(
+             documentFiltré,
+                new Newtonsoft.Json.JsonSerializerSettings
+                        {
+                     ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
+                 }
+                );
+
+
+                // Encapsuler dans "champs=" et encoder en application/x-www-form-urlencoded
+                string formEncodedPayload = $"champs={Uri.EscapeDataString(jsonPayload)}";
+
+                // Log du format envoyé
+                Console.WriteLine("Payload encodé envoyé : " + formEncodedPayload);
+
+                // Envoyer la requête en POST avec application/x-www-form-urlencoded
+                List<Document> liste = TraitementRecup<Document>(POST, "document", formEncodedPayload);
+
+                if (liste == null)
+                {
+                    Console.WriteLine("Erreur : La liste retournée par l'API est null.");
+                    return false;
+                }
+
+
+                // Log de la réponse API
+                Console.WriteLine($"Réponse API: {liste}");
+
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erreur lors de l'ajout du document : " + ex.Message);
+                return false;
+            }
+        }
+
+        public bool AjouterDvd(object dvd)
+        {
+            //effectuer une requete API de POST dans la table livre avec id, isbn, auteur et collection
+
+            try
+            {
+                // Sélectionner uniquement les champs requis
+                var docDict = JObject.FromObject(dvd);
+
+                Console.WriteLine("Contenu de document : " + JsonConvert.SerializeObject(dvd, Formatting.Indented));
+
+
+                var dvdFiltre = new
+                {
+                    id = docDict.ContainsKey("Id") ? docDict["Id"]?.ToString() : null,
+                    synopsis = docDict.ContainsKey("Synopsis") ? docDict["Synopsis"]?.ToString() : null,
+                    realisateur = docDict.ContainsKey("Realisateur") ? docDict["Realisateur"]?.ToString() : null,
+                    duree = docDict.ContainsKey("Duree") ? docDict["Duree"]?.ToString() : null
+                };
+
+
+                string jsonPayload = JsonConvert.SerializeObject(
+             dvdFiltre,
+                new Newtonsoft.Json.JsonSerializerSettings
+                {
+                    ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
+                }
+                );
+
+
+                // Encapsuler dans "champs=" et encoder en application/x-www-form-urlencoded
+                string formEncodedPayload = $"champs={Uri.EscapeDataString(jsonPayload)}";
+
+                // Log du format envoyé
+                Console.WriteLine("Payload encodé envoyé : " + formEncodedPayload);
+
+                // Envoyer la requête en POST avec application/x-www-form-urlencoded
+                List<Document> liste = TraitementRecup<Document>(POST, "dvd", formEncodedPayload);
+
+                if (liste == null)
+                {
+                    Console.WriteLine("Erreur : La liste retournée par l'API est null.");
+                    return false;
+                }
+
+
+                // Log de la réponse API
+                Console.WriteLine($"Réponse API: {liste}");
+
+                return (liste != null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erreur lors de l'ajout du document : " + ex.Message);
+                return false;
+            }
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nomRayon"></param>
+        /// <returns></returns>
+        public string GetIdByNameOfRayon(string nomRayon)
+        {
+            if (classeurRayons != null && classeurRayons.Count > 0)
+            {
+                // Cherche l'ID correspondant au libellé
+                var rayon = classeurRayons.FirstOrDefault(x => x.Value.Libelle == nomRayon);
+
+                if (!string.IsNullOrEmpty(rayon.Key))
+                {
+                    return rayon.Key; // Retourne l'ID du rayon trouvé
+                }
+            }
+
+            return null; // Retourne null si aucun rayon correspondant n'est trouvé
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nomPublic"></param>
+        /// <returns></returns>
+        public string GetIdByNameOfPublic(string nomPublic)
+        {
+            if (classeurPublics != null && classeurPublics.Count > 0)
+            {
+                // Cherche l'ID correspondant au libellé
+                var pub = classeurPublics.FirstOrDefault(x => x.Value.Libelle == nomPublic);
+
+                if (!string.IsNullOrEmpty(pub.Key))
+                {
+                    return pub.Key; // Retourne l'ID du public trouvé
+                }
+            }
+
+            return null; // Retourne null si aucun public correspondant n'est trouvé
+        }
+
+        public string GetIdByNameOfGenre(string nomGenre)
+        {
+            if (classeurGenres != null && classeurGenres.Count > 0)
+            {
+                // Cherche l'ID correspondant au libellé
+                var genre = classeurGenres.FirstOrDefault(x => x.Value.Libelle == nomGenre);
+
+                if (!string.IsNullOrEmpty(genre.Key))
+                {
+                    return genre.Key; // Retourne l'ID du genre trouvé
+                }
+            }
+
+            return null; // Retourne null si aucun genre correspondant n'est trouvé
+        }
+
+
+
+
 
         /// <summary>
         /// Retourne les exemplaires d'une revue
@@ -163,6 +530,418 @@ namespace MediaTekDocuments.dal
             return false;
         }
 
+        public void DictionnaireGenre()
+        {
+            List<Categorie> genres = GetAllGenres();
+
+            foreach (var genre in genres)
+            {
+                classeurGenres[genre.Id] = (Genre)genre; // Conversion Categorie -> Genre si nécessaire
+            }
+
+            Console.WriteLine("📂 Classeur des genres créé avec succès !");
+
+        }
+
+        public void DictionnairePublic()
+        {
+            List<Categorie> publics = GetAllPublics();
+
+            foreach (var pub in publics)
+            {
+                classeurPublics[pub.Id] = (Public)pub; // Conversion Categorie -> Public si nécessaire
+            }
+
+            Console.WriteLine("📂 Classeur des genres créé avec succès !");
+
+        }
+
+        public void DictionnaireRayon()
+        {
+            List<Categorie> rayons = GetAllRayons();
+
+            foreach (var rayon in rayons)
+            {
+                classeurRayons[rayon.Id] = (Rayon)rayon; // Conversion Categorie -> Public si nécessaire
+            }
+
+            Console.WriteLine("📂 Classeur des genres créé avec succès !");
+
+        }
+
+        public bool ModifierRevue(Revue revue)
+        {
+            try
+            {
+                // Vérifier que l'ID du livre est présent
+                if (string.IsNullOrEmpty(revue.Id))
+                {
+                    return false;
+                }
+
+                // Construire l'objet JSON avec seulement `isbn` et `auteur`
+                var revueFiltre = new
+                {
+                    periodicite = revue.Periodicite,
+                    delaiMiseADispo = revue.DelaiMiseADispo
+
+                };
+
+                // Convertir l'objet en JSON
+                string jsonPayload = JsonConvert.SerializeObject(revueFiltre);
+
+                // 🔹 Encapsuler le JSON dans `x-www-form-urlencoded`
+                string formEncodedPayload = $"champs={Uri.EscapeDataString(jsonPayload)}";
+
+                // URL API avec l'ID du livre
+                string url = $"revue/{revue.Id}";
+
+                // Envoyer la requête PUT
+                List<Document> liste = TraitementRecup<Document>(PUT, url, formEncodedPayload);
+
+                if (liste == null)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool ModifierDvd(Dvd dvd)
+        {
+            try
+            {
+                // Vérifier que l'ID du livre est présent
+                if (string.IsNullOrEmpty(dvd.Id))
+                {
+                    return false;
+                }
+
+                // Construire l'objet JSON avec seulement `isbn` et `auteur`
+                var dvdFiltre = new
+                {
+                    synopsis = dvd.Synopsis,
+                    realisateur = dvd.Realisateur,
+                    duree = dvd.Duree.ToString()
+
+
+                };
+
+                // Convertir l'objet en JSON
+                string jsonPayload = JsonConvert.SerializeObject(dvdFiltre);
+
+                // 🔹 Encapsuler le JSON dans `x-www-form-urlencoded`
+                string formEncodedPayload = $"champs={Uri.EscapeDataString(jsonPayload)}";
+
+                // URL API avec l'ID du livre
+                string url = $"dvd/{dvd.Id}";
+
+                // Envoyer la requête PUT
+                List<Document> liste = TraitementRecup<Document>(PUT, url, formEncodedPayload);
+
+                if (liste == null)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool ModifierLivre(Livre livre)
+        {
+            try
+            {
+                // Vérifier que l'ID du livre est présent
+                if (string.IsNullOrEmpty(livre.Id))
+                {
+                    return false;
+                }
+
+                // Construire l'objet JSON avec seulement `isbn` et `auteur`
+                var livreFiltré = new
+                {
+                    isbn = livre.Isbn,
+                    auteur = livre.Auteur,
+                    collection = livre.Collection
+                    
+                };
+
+                // Convertir l'objet en JSON
+                string jsonPayload = JsonConvert.SerializeObject(livreFiltré);
+
+                // 🔹 Encapsuler le JSON dans `x-www-form-urlencoded`
+                string formEncodedPayload = $"champs={Uri.EscapeDataString(jsonPayload)}";
+
+                // URL API avec l'ID du livre
+                string url = $"livre/{livre.Id}";
+
+                // Envoyer la requête PUT
+                List<Document> liste = TraitementRecup<Document>(PUT, url, formEncodedPayload);
+
+                if (liste == null)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool ModifierDocument(Document document)
+        {
+            try
+            {
+                // Vérifier que l'ID du livre est présent
+                if (string.IsNullOrEmpty(document.Id))
+                {
+                    return false;
+                }
+
+                // Construire l'objet JSON avec seulement `isbn` et `auteur`
+                var documentFiltre = new
+                {
+                    titre = document.Titre,
+                    image = document.Image,
+                    idRayon = document.IdRayon,
+                    idGenre = document.IdGenre,
+                    idPublic = document.IdPublic
+            };
+
+                // Convertir l'objet en JSON
+                string jsonPayload = JsonConvert.SerializeObject(documentFiltre);
+
+                // 🔹 Encapsuler le JSON dans `x-www-form-urlencoded`
+                string formEncodedPayload = $"champs={Uri.EscapeDataString(jsonPayload)}";
+
+                // URL API avec l'ID du livre
+                string url = $"document/{document.Id}";
+
+                // Envoyer la requête PUT
+                List<Document> liste = TraitementRecup<Document>(PUT, url, formEncodedPayload);
+
+                if (liste == null)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool ModifierLivre_DvD(LivreDvd livredvd)
+        {
+            try
+            {
+                // Vérifier que l'ID du livre est présent
+                if (string.IsNullOrEmpty(livredvd.Id))
+                {
+                    return false;
+                }
+
+                // Construire l'objet JSON avec seulement `isbn` et `auteur`
+                var LivreDvDFiltre = new
+                {
+                    id = livredvd.Titre
+                };
+
+                // Convertir l'objet en JSON
+                string jsonPayload = JsonConvert.SerializeObject(LivreDvDFiltre);
+
+                // 🔹 Encapsuler le JSON dans `x-www-form-urlencoded`
+                string formEncodedPayload = $"champs={Uri.EscapeDataString(jsonPayload)}";
+
+                // URL API avec l'ID du livre
+                string url = $"document/{livredvd.Id}";
+
+                // Envoyer la requête PUT
+                List<Document> liste = TraitementRecup<Document>(PUT, url, formEncodedPayload);
+
+                if (liste == null)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool SupprimerLivre(Livre livre)
+        {
+            try
+            {
+                // Vérifier que l'ID du livre est présent
+                if (string.IsNullOrEmpty(livre.Id))
+                {
+                    return false;
+                }
+
+                // Construire l'URL avec l'ID du livre au format JSON
+                string jsonId = Uri.EscapeDataString($"{{\"id\":\"{livre.Id}\"}}");
+                string url = $"livre/{jsonId}";
+
+                // Envoyer la requête DELETE avec TraitementRecup
+                List<Livre> liste = TraitementRecup<Livre>(DELETE, url, null);
+
+                if (liste == null)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur suppression livre {livre.Id} : {ex.Message}");
+                return false;
+            }
+        }
+
+        public bool SupprimerDvd(Dvd dvd)
+        {
+            try
+            {
+                // Vérifier que l'ID du livre est présent
+                if (string.IsNullOrEmpty(dvd.Id))
+                {
+                    return false;
+                }
+
+                // Construire l'URL avec l'ID du livre au format JSON
+                string jsonId = Uri.EscapeDataString($"{{\"id\":\"{dvd.Id}\"}}");
+                string url = $"dvd/{jsonId}";
+
+                // Envoyer la requête DELETE avec TraitementRecup
+                List<Livre> liste = TraitementRecup<Livre>(DELETE, url, null);
+
+                if (liste == null)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur suppression livre {dvd.Id} : {ex.Message}");
+                return false;
+            }
+        }
+
+        public bool SupprimerRevue(Revue revue)
+        {
+            try
+            {
+                // Vérifier que l'ID du livre est présent
+                if (string.IsNullOrEmpty(revue.Id))
+                {
+                    return false;
+                }
+
+                // Construire l'URL avec l'ID du livre au format JSON
+                string jsonId = Uri.EscapeDataString($"{{\"id\":\"{revue.Id}\"}}");
+                string url = $"revue/{jsonId}";
+
+                // Envoyer la requête DELETE avec TraitementRecup
+                List<Livre> liste = TraitementRecup<Livre>(DELETE, url, null);
+
+                if (liste == null)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur suppression livre {revue.Id} : {ex.Message}");
+                return false;
+            }
+        }
+
+        public bool SupprimerLivre_DvD(LivreDvd livre)
+        {
+            try
+            {
+                // Vérifier que l'ID du livre est présent
+                if (string.IsNullOrEmpty(livre.Id))
+                {
+                    return false;
+                }
+
+                // Construire l'URL avec l'ID du livre au format JSON
+                string jsonId = Uri.EscapeDataString($"{{\"id\":\"{livre.Id}\"}}");
+                string url = $"livres_dvd/{jsonId}";
+
+                // Envoyer la requête DELETE avec TraitementRecup
+                List<Livre> liste = TraitementRecup<Livre>(DELETE, url, null);
+
+                if (liste == null)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur suppression livre {livre.Id} : {ex.Message}");
+                return false;
+            }
+        }
+
+        public bool SupprimerDocument(Document document)
+        {
+            try
+            {
+                // Vérifier que l'ID du livre est présent
+                if (string.IsNullOrEmpty(document.Id))
+                {
+                    return false;
+                }
+
+                // Construire l'URL avec l'ID du livre au format JSON
+                string jsonId = Uri.EscapeDataString($"{{\"id\":\"{document.Id}\"}}");
+                string url = $"document/{jsonId}";
+
+                // Envoyer la requête DELETE avec TraitementRecup
+                List<Livre> liste = TraitementRecup<Livre>(DELETE, url, null);
+
+                if (liste == null)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur suppression livre {document.Id} : {ex.Message}");
+                return false;
+            }
+        }
+
         /// <summary>
         /// Traitement de la récupération du retour de l'api, avec conversion du json en liste pour les select (GET)
         /// </summary>
@@ -177,7 +956,11 @@ namespace MediaTekDocuments.dal
             List<T> liste = new List<T>();
             try
             {
+                Console.WriteLine($"Méthode utilisée : {methode}, Message : {message}, Paramètres : {parametres}");
+
                 JObject retour = api.RecupDistant(methode, message, parametres);
+
+                Console.WriteLine(retour);
                 // extraction du code retourné
                 String code = (String)retour["code"];
                 if (code.Equals("200"))
@@ -188,6 +971,15 @@ namespace MediaTekDocuments.dal
                         String resultString = JsonConvert.SerializeObject(retour["result"]);
                         // construction de la liste d'objets à partir du retour de l'api
                         liste = JsonConvert.DeserializeObject<List<T>>(resultString, new CustomBooleanJsonConverter());
+
+                        Console.WriteLine("Contenu brut de result : " + resultString);
+
+                    }
+                    // dans le cas du POST (insert), récupération de la liste d'objets
+                    if (methode.Equals(POST))
+                    {
+                        Console.WriteLine($"Payload envoyé : {parametres}");
+                        Console.WriteLine("Réponse brute de l'API : " + retour.ToString());
                     }
                 }
                 else
@@ -198,6 +990,7 @@ namespace MediaTekDocuments.dal
             {
                 Console.WriteLine("Erreur lors de l'accès à l'API : "+e.Message);
                 Environment.Exit(0);
+
             }
             return liste;
         }
