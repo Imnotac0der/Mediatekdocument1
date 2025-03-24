@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using MediaTekDocuments.model;
 using MediaTekDocuments.dal;
+using System;
 
 namespace MediaTekDocuments.controller
 {
@@ -41,6 +42,34 @@ namespace MediaTekDocuments.controller
         }
 
         /// <summary>
+        /// getter sur la liste des livres
+        /// </summary>
+        /// <returns>Liste d'objets Livre</returns>
+        public Livre GetLivre(string id)
+        {
+            return access.GetLivre(id);
+        }
+
+        /// <summary>
+        /// getter sur la liste des revues
+        /// </summary>
+        /// <returns>Liste d'objets Revue</returns>
+        public Revue GetRevue(string id)
+        {
+            return access.GetRevue(id);
+        }
+
+        /// <summary>
+        /// getter sur la liste des dvd
+        /// </summary>
+        /// <returns>Liste d'objets Livre</returns>
+        public Dvd GetDvd(string id)
+        {
+            return access.GetDvd(id);
+        }
+
+
+        /// <summary>
         /// getter sur la liste des Dvd
         /// </summary>
         /// <returns>Liste d'objets dvd</returns>
@@ -56,6 +85,45 @@ namespace MediaTekDocuments.controller
         public List<Revue> GetAllRevues()
         {
             return access.GetAllRevues();
+        }
+
+        /// <summary>
+        /// getter sur la liste des commandes de livres
+        /// </summary>
+        /// <returns>Liste d'objets Livre</returns>
+        public List<CommandeDocument> GetAllCommandesDocumentLivres()
+        {
+            return access.GetAllCommandesDocumentLivres();
+        }
+
+        public List<Abonnement> GetAllAbonnements()
+        {
+            return access.GetAllAbonnements();
+        }
+
+        public List<Abonnement> GetAllAbonnements30days()
+        {
+            return access.GetAllAbonnements30days();
+        }
+
+        public List<CommandeDocument> GetAllCommandesDocumentDvd()
+        {
+            return access.GetAllCommandesDocumentDvd();
+        }
+
+        public Commande GetCommandeById(string id)
+        {
+            return access.GetCommandeById(id);
+        }
+
+        public Suivi GetSuiviById(string id)
+        {
+            return access.GetSuiviById(id);
+        }
+
+        public Exemplaire GetExemplaireById(string idRevue)
+        {
+            return access.GetExemplaireById(idRevue);
         }
 
         /// <summary>
@@ -149,8 +217,45 @@ namespace MediaTekDocuments.controller
             access.AjouterDocument(dvd);
             access.AjouterLivreDvD(dvd);
             return access.AjouterDvd(dvd);
+        }
+        public bool AjouterExemplaire(Exemplaire exemplaire)
+        {
+            return access.AjouterExemplaire(exemplaire);
+        }
 
-            //mettre à jour la page d'accueil
+        public bool ModifierSuivi(Suivi suivi)
+        {
+            return access.ModifierSuivi(suivi);
+        }
+
+        public bool UpdateAbonnement(Abonnement abonnement)
+        {
+            return access.UpdateAbonnement(abonnement);
+        }
+
+        public bool UpdateMontantCommande(Commande commande)
+        {
+            return access.UpdateMontantCommande(commande);
+        }
+
+        public bool AjouterCommande(Commande commande)
+        {
+            return access.AjouterCommande(commande);
+        }
+
+        public bool AjouterAbonnement(Abonnement abonnement)
+        {
+            return access.AjouterAbonnement(abonnement);
+        }
+
+        public bool AjouterCommandeDocument(CommandeDocument commandeDocument)
+        {
+            return access.AjouterCommandeDocument(commandeDocument);
+        }
+
+        public bool AjouterSuivi(Suivi suivi)
+        {
+            return access.AjouterSuivi(suivi);
         }
 
         public bool ModifierLivre(Livre livre, Document document)
@@ -198,6 +303,29 @@ namespace MediaTekDocuments.controller
             access.SupprimerDvd(dvd);
             access.SupprimerLivre_DvD(dvd);
             return access.SupprimerDocument(document);
+        }
+
+        public bool SupprimerCommande(Commande commande, CommandeDocument commandeDocument, Suivi suivi)
+        {
+            access.SupprimerSuivi(suivi);
+            access.SupprimerCommandeDocument(commandeDocument);
+            return access.SupprimerCommande(commande);
+        }
+
+        public bool SupprimerAbonnement(Commande commande, Abonnement abonnement)
+        {
+            access.SupprimerAbonnement(abonnement);
+            return access.SupprimerCommande(commande);
+        }
+
+        public bool CheckAbonnementByIdRevue(string id)
+        {
+            return access.CheckAbonnementByIdRevue(id);
+        }
+
+        public bool ParutionDansAbonnement(DateTime datecommande, DateTime dateFin, DateTime? dateParution)
+        {
+            return access.ParutionDansAbonnement(datecommande, dateFin, dateParution);
         }
     }
 }

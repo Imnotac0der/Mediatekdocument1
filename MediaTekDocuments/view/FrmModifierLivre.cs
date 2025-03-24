@@ -131,9 +131,6 @@ namespace MediaTekDocuments.view
         {
             // Vérifie que tous les champs sont remplis
             if (string.IsNullOrWhiteSpace(txbLivresTitre.Text) ||
-                txbLivresIsbn.Text == null ||
-                string.IsNullOrWhiteSpace(txbLivresAuteur.Text) ||
-                string.IsNullOrWhiteSpace(txbLivresCollection.Text) ||
                 cb_genre.SelectedItem == null ||
                 cb_public.SelectedItem == null ||
                 cb_rayon.SelectedItem == null ||

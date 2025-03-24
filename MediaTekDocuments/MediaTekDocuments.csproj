@@ -84,6 +84,17 @@
     <Compile Include="manager\ApiRest.cs" />
     <Compile Include="controller\FrmMediatekController.cs" />
     <Compile Include="dal\Access.cs" />
+    <Compile Include="model\Abonnement.cs" />
+    <Compile Include="model\CommandeEntiere.cs" />
+    <Compile Include="model\Suivi.cs" />
+    <Compile Include="model\CommandeDocument.cs" />
+    <Compile Include="model\Commande.cs" />
+    <Compile Include="view\FrmAbonnements.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\FrmAbonnements.Designer.cs">
+      <DependentUpon>FrmAbonnements.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\FrmAjouterDvD.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +159,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="view\FrmAbonnements.resx">
+      <DependentUpon>FrmAbonnements.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\FrmAjouterDvD.resx">
       <DependentUpon>FrmAjouterDvD.cs</DependentUpon>
     </EmbeddedResource>
