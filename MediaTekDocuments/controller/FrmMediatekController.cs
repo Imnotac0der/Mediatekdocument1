@@ -148,21 +148,31 @@ namespace MediaTekDocuments.controller
         /// <summary>
         /// récupère les exemplaires d'une revue
         /// </summary>
-        /// <param name="idDocuement">id de la revue concernée</param>
+        /// <param name="idDocument">id de la revue concernée</param>
         /// <returns>Liste d'objets Exemplaire</returns>
-        public List<Exemplaire> GetExemplairesRevue(string idDocuement)
+        public List<Exemplaire> GetExemplairesRevue(string idDocument)
         {
-            return access.GetExemplairesRevue(idDocuement);
+            return access.GetAllExemplaires(idDocument);
         }
 
         /// <summary>
-        /// Crée un exemplaire d'une revue dans la bdd
+        /// récupère les exemplaires d'une revue
         /// </summary>
-        /// <param name="exemplaire">L'objet Exemplaire concerné</param>
-        /// <returns>True si la création a pu se faire</returns>
-        public bool CreerExemplaire(Exemplaire exemplaire)
+        /// <param name="idDocument">id de la revue concernée</param>
+        /// <returns>Liste d'objets Exemplaire</returns>
+        public List<Exemplaire> GetExemplairesLivre(string idDocument)
         {
-            return access.CreerExemplaire(exemplaire);
+            return access.GetAllExemplaires(idDocument);
+        }
+
+        /// <summary>
+        /// récupère les exemplaires d'une revue
+        /// </summary>
+        /// <param name="idDocument">id de la revue concernée</param>
+        /// <returns>Liste d'objets Exemplaire</returns>
+        public List<Exemplaire> GetExemplairesDvd(string idDocument)
+        {
+            return access.GetAllExemplaires(idDocument);
         }
 
         public string GetIdByNameOfRayon(string idRayon)
@@ -327,5 +337,21 @@ namespace MediaTekDocuments.controller
         {
             return access.ParutionDansAbonnement(datecommande, dateFin, dateParution);
         }
+
+        public List<Etat> GetAllEtats()
+        {
+            return access.GetAllEtats();
+        }
+
+        public bool ModifierEtatExemplaire(Exemplaire exemplaire, Etat etat)
+        {
+            return access.ModifierEtatExemplaire(exemplaire, etat);
+        }
+
+        public bool SupprimerExemplaire(Exemplaire exemplaire)
+        {
+            return access.SupprimerExemplaire(exemplaire);
+        }
+
     }
 }

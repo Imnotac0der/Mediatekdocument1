@@ -12,6 +12,7 @@ namespace MediaTekDocuments.model
         public DateTime DateAchat { get; set; }
         public string IdEtat { get; set; }
         public string Id { get; set; }
+        public string LibelleEtat { get; set; }
 
         public Exemplaire(int numero, DateTime dateAchat, string photo, string idEtat, string idDocument)
         {

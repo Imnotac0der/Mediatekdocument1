@@ -83,6 +83,16 @@ namespace MediaTekDocuments.dal
         }
 
         /// <summary>
+        /// Retourne tous les états à partir de la BDD
+        /// </summary>
+        /// <returns>Liste d'objets Etat</returns>
+        public List<Etat> GetAllEtats()
+        {
+            IEnumerable<Etat> lesEtats = TraitementRecup<Etat>(GET, "etat", null);
+            return new List<Etat>(lesEtats);
+        }
+
+        /// <summary>
         /// Retourne tous les genres à partir de la BDD
         /// </summary>
         /// <returns>Liste d'objets Genre</returns>
@@ -472,46 +482,53 @@ namespace MediaTekDocuments.dal
         {
             try
             {
-                // Vérification et extraction des données
                 var docDict = JObject.Parse(JsonConvert.SerializeObject(exemplaire));
-
+                dynamic exemplaireTriage;
 
                 Console.WriteLine("📌 Contenu de l'exemplaire : " + JsonConvert.SerializeObject(exemplaire, Formatting.Indented));
 
-                // Extraction et conversion des champs
-                var exemplaireTriage = new
+                if (exemplaire.Numero == 0) // ou == null si autorisé
                 {
-                    id = docDict["Id"]?.ToString() ?? "MISSING_ID",
-                    dateAchat = docDict["DateAchat"] != null && DateTime.TryParse(docDict["DateAchat"].ToString(), out DateTime date)
-                ? date.ToString("yyyy-MM-dd") // Formatage pour MySQL
-                : null,
-                    photo = docDict["Photo"]?.ToString() ?? "",
-                    idEtat = docDict["IdEtat"]?.ToString() ?? "MISSING_IDETAT"
-                };
+                    exemplaireTriage = new
+                    {
+                        id = docDict["Id"]?.ToString() ?? "MISSING_ID",
+                        dateAchat = docDict["DateAchat"] != null && DateTime.TryParse(docDict["DateAchat"].ToString(), out DateTime date)
+                            ? date.ToString("yyyy-MM-dd")
+                            : null,
+                        photo = docDict["Photo"]?.ToString() ?? "",
+                        idEtat = docDict["IdEtat"]?.ToString() ?? "MISSING_IDETAT"
+                    };
+                }
+                else
+                {
+                    exemplaireTriage = new
+                    {
+                        id = docDict["Id"]?.ToString() ?? "MISSING_ID",
+                        numero = docDict.ContainsKey("Numero") && int.TryParse(docDict["Numero"]?.ToString(), out int result) ? result : 0,
+                        dateAchat = docDict["DateAchat"] != null && DateTime.TryParse(docDict["DateAchat"].ToString(), out DateTime date)
+                            ? date.ToString("yyyy-MM-dd")
+                            : null,
+                        photo = docDict["Photo"]?.ToString() ?? "",
+                        idEtat = docDict["IdEtat"]?.ToString() ?? "MISSING_IDETAT"
+                    };
+                }
 
-                // Vérification avant envoi
+                // ✅ Vérification
                 if (string.IsNullOrEmpty(exemplaireTriage.id) || string.IsNullOrEmpty(exemplaireTriage.idEtat))
                 {
                     Console.WriteLine("❌ Erreur : Champs obligatoires manquants !");
                     return false;
                 }
 
-                // Sérialisation en JSON
-                string jsonPayload = JsonConvert.SerializeObject(
-                    exemplaireTriage,
+                string jsonPayload = JsonConvert.SerializeObject(exemplaireTriage,
                     new JsonSerializerSettings
                     {
                         ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver()
-                    }
-                );
+                    });
 
-                // Encapsuler dans "champs=" et encoder en application/x-www-form-urlencoded
                 string formEncodedPayload = $"champs={Uri.EscapeDataString(jsonPayload)}";
-
-                // Log du format envoyé
                 Console.WriteLine("🚀 Payload envoyé : " + formEncodedPayload);
 
-                // Envoi de la requête POST
                 List<Document> liste = TraitementRecup<Document>(POST, "exemplaire", formEncodedPayload);
 
                 if (liste == null)
@@ -520,18 +537,17 @@ namespace MediaTekDocuments.dal
                     return false;
                 }
 
-                // Log de la réponse API
                 Console.WriteLine($"✅ Réponse API : {JsonConvert.SerializeObject(liste, Formatting.Indented)}");
 
-                return liste != null;
+                return true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("🔥 Erreur lors de l'ajout de l'exemplaire : " + ex.Message);
                 return false;
             }
-
         }
+
 
         public bool AjouterCommande(Commande commande)
         {
@@ -1006,31 +1022,11 @@ namespace MediaTekDocuments.dal
         /// </summary>
         /// <param name="idDocument">id de la revue concernée</param>
         /// <returns>Liste d'objets Exemplaire</returns>
-        public List<Exemplaire> GetExemplairesRevue(string idDocument)
+        public List<Exemplaire> GetAllExemplaires(string idDocument)
         {
             String jsonIdDocument = convertToJson("id", idDocument);
             List<Exemplaire> lesExemplaires = TraitementRecup<Exemplaire>(GET, "exemplaire/" + jsonIdDocument, null);
             return lesExemplaires;
-        }
-
-        /// <summary>
-        /// ecriture d'un exemplaire en base de données
-        /// </summary>
-        /// <param name="exemplaire">exemplaire à insérer</param>
-        /// <returns>true si l'insertion a pu se faire (retour != null)</returns>
-        public bool CreerExemplaire(Exemplaire exemplaire)
-        {
-            String jsonExemplaire = JsonConvert.SerializeObject(exemplaire, new CustomDateTimeConverter());
-            try
-            {
-                List<Exemplaire> liste = TraitementRecup<Exemplaire>(POST, "exemplaire", "champs=" + jsonExemplaire);
-                return (liste != null);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            return false;
         }
 
         public void DictionnaireGenre()
@@ -1070,6 +1066,42 @@ namespace MediaTekDocuments.dal
 
             Console.WriteLine("📂 Classeur des genres créé avec succès !");
 
+        }
+
+        public bool ModifierEtatExemplaire(Exemplaire exemplaire, Etat etat)
+        {
+            try
+            {
+                // Construire l'objet JSON avec seulement `isbn` et `auteur`
+                var etatFiltre = new
+                {
+                    numero = exemplaire.Numero,
+                    idEtat = etat.Id
+                };
+
+                // Convertir l'objet en JSON
+                string jsonPayload = JsonConvert.SerializeObject(etatFiltre);
+
+                // 🔹 Encapsuler le JSON dans `x-www-form-urlencoded`
+                string formEncodedPayload = $"champs={Uri.EscapeDataString(jsonPayload)}";
+
+                // URL API avec l'ID du livre
+                string url = $"exemplaire/numero";
+
+                // Envoyer la requête PUT
+                List<Exemplaire> liste = TraitementRecup<Exemplaire>(PUT, url, formEncodedPayload);
+
+                if (liste == null)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public bool ModifierRevue(Revue revue)
@@ -1540,6 +1572,37 @@ namespace MediaTekDocuments.dal
             catch (Exception ex)
             {
                 Console.WriteLine($"Erreur suppression livre {livre.Id} : {ex.Message}");
+                return false;
+            }
+        }
+
+        public bool SupprimerExemplaire(Exemplaire exemplaire)
+        {
+            try
+            {
+                // Vérifier que l'ID du livre est présent
+                if (exemplaire.Numero == null)
+                {
+                    return false;
+                }
+
+                // Construire l'URL avec l'ID du livre au format JSON
+                string jsonId = Uri.EscapeDataString($"{{\"numero\":\"{exemplaire.Numero}\"}}");
+                string url = $"exemplaire/{jsonId}";
+
+                // Envoyer la requête DELETE avec TraitementRecup
+                List<Exemplaire> liste = TraitementRecup<Exemplaire>(DELETE, url, null);
+
+                if (liste == null)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur suppression livre {exemplaire.Numero} : {ex.Message}");
                 return false;
             }
         }
