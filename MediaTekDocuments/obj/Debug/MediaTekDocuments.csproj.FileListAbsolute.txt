@@ -38,3 +38,4 @@ C:\Users\Andréas\Source\Repos\mediatekdocuments\MediaTekDocuments\obj\Debug\Med
 C:\Users\Andréas\Source\Repos\mediatekdocuments\MediaTekDocuments\obj\Debug\MediaTekDocuments.view.FrmModifierDvD.resources
 C:\Users\Andréas\Source\Repos\mediatekdocuments\MediaTekDocuments\obj\Debug\MediaTekDocuments.view.FrmModifierRevue.resources
 C:\Users\Andréas\Source\Repos\mediatekdocuments\MediaTekDocuments\obj\Debug\MediaTekDocuments.view.FrmAbonnements.resources
+C:\Users\Andréas\Source\Repos\mediatekdocuments\MediaTekDocuments\obj\Debug\MediaTekDocuments.view.FrmAuthentification.resources

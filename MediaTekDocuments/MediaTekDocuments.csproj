@@ -89,6 +89,7 @@
     <Compile Include="model\Suivi.cs" />
     <Compile Include="model\CommandeDocument.cs" />
     <Compile Include="model\Commande.cs" />
+    <Compile Include="model\Utilisateur.cs" />
     <Compile Include="view\FrmAbonnements.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +113,12 @@
     </Compile>
     <Compile Include="view\FrmAjouterRevue.Designer.cs">
       <DependentUpon>FrmAjouterRevue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\FrmAuthentification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\FrmAuthentification.Designer.cs">
+      <DependentUpon>FrmAuthentification.cs</DependentUpon>
     </Compile>
     <Compile Include="view\FrmMediatek.cs">
       <SubType>Form</SubType>
@@ -170,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\FrmAjouterRevue.resx">
       <DependentUpon>FrmAjouterRevue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\FrmAuthentification.resx">
+      <DependentUpon>FrmAuthentification.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\FrmMediatek.resx">
       <DependentUpon>FrmMediatek.cs</DependentUpon>
