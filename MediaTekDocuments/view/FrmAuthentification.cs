@@ -14,8 +14,6 @@ namespace MediaTekDocuments.view
     public partial class FrmAuthentification : Form
     {
         private FrmMediatekController controller;
-        private FrmAbonnements frmAbonnements;
-        private FrmMediatek frmMediatek;
         public FrmAuthentification()
         {
             InitializeComponent();
@@ -76,11 +74,6 @@ namespace MediaTekDocuments.view
             {
                 MessageBox.Show("Une erreur est survenue : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-        }
-
-        private void FrmAuthentification_Load(object sender, EventArgs e)
-        {
 
         }
     }

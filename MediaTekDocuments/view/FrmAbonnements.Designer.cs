@@ -130,7 +130,6 @@ namespace MediaTekDocuments.view
             this.MinimizeBox = false;
             this.Name = "FrmAbonnements";
             this.Text = "FrmAbonnements";
-            this.Load += new System.EventHandler(this.FrmAbonnements_Load);
             this.grpAbonnements.ResumeLayout(false);
             this.grpAbonnements.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAbonnementsListe)).EndInit();

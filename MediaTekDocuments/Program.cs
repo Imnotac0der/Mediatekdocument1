@@ -2,6 +2,7 @@
 using System;
 using System.Windows.Forms;
 
+
 namespace MediaTekDocuments
 {
     static class Program
@@ -12,6 +13,7 @@ namespace MediaTekDocuments
         [STAThread]
         static void Main()
         {
+            bddmanager.LoggerHelper.Initialize();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FrmAuthentification());

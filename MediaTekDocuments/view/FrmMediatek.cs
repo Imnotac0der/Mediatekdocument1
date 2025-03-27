@@ -29,7 +29,6 @@ namespace MediaTekDocuments.view
         private FrmAjouterDvD FrmAjouterDvD;
         private FrmModifierDvD FrmModifierDvD;
         private FrmModifierRevue FrmModifierRevue;
-        private FrmAbonnements FrmAbonnements;
         private Utilisateur utilisateur;
 
         /// <summary>
@@ -122,7 +121,6 @@ namespace MediaTekDocuments.view
         private readonly BindingSource bdgCommandesRevueListe = new BindingSource();
         private readonly BindingSource bdgLivresExemplairesListe = new BindingSource();
         private readonly BindingSource bdgDvdExemplairesListe = new BindingSource();
-        private readonly BindingSource bdgParutionExemplairesListe = new BindingSource();
         public List<Livre> lesLivres = new List<Livre>();
         public List<CommandeDocument> lesCommandesDocument = new List<CommandeDocument>();
         public List<Abonnement> lesAbonnements = new List<Abonnement>();
@@ -159,7 +157,7 @@ namespace MediaTekDocuments.view
 
                 foreach (var ex in exemplaires)
                 {
-                    var etat = etats.FirstOrDefault(e => e.Id == ex.IdEtat);
+                    var etat = etats.Find(e => e.Id == ex.IdEtat);
                     ex.LibelleEtat = etat != null ? etat.Libelle : "Inconnu";
                 }
 
@@ -202,7 +200,7 @@ namespace MediaTekDocuments.view
 
                 foreach (var ex in exemplaires)
                 {
-                    var etat = etats.FirstOrDefault(e => e.Id == ex.IdEtat);
+                    var etat = etats.Find(e => e.Id == ex.IdEtat);
                     ex.LibelleEtat = etat != null ? etat.Libelle : "Inconnu";
                 }
 
@@ -1494,7 +1492,7 @@ namespace MediaTekDocuments.view
 
                 foreach (var ex in exemplaires)
                 {
-                    var etat = etats.FirstOrDefault(e => e.Id == ex.IdEtat);
+                    var etat = etats.Find(e => e.Id == ex.IdEtat);
                     ex.LibelleEtat = etat != null ? etat.Libelle : "Inconnu";
                 }
 
@@ -2054,11 +2052,6 @@ namespace MediaTekDocuments.view
             RemplirDvdListeComplete();
         }
 
-        private void tabOngletsApplication_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void tabCommandesLivres_Enter(object sender, EventArgs e)
         {
             Console.WriteLine("🔎 tabCommandesLivres_Enter est bien exécuté !");
@@ -2273,7 +2266,7 @@ namespace MediaTekDocuments.view
                         return;
                     }
                     Exemplaire exemplaire = new Exemplaire(
-                        1,
+                        0,
                         DateTime.Now,
                         null,
                         Etat,
@@ -2637,11 +2630,6 @@ namespace MediaTekDocuments.view
             VerifierSuiviCommandeLivres();
         }
 
-        private void label75_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void dgv_commandesDvd_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             VideCommandesDvdZones();
@@ -2789,7 +2777,6 @@ namespace MediaTekDocuments.view
         {
             DateTime date = DateTime.Now;
             string stade = "en cours";
-            string idEtat = "00001";
 
             Commande commande = new Commande(
                 txbCDvdNumCommande.Text,
@@ -2966,7 +2953,7 @@ namespace MediaTekDocuments.view
                     }
 
                     Exemplaire exemplaire = new Exemplaire(
-                        1,
+                        0,
                         DateTime.Now,
                         null,
                         Etat,
@@ -3150,11 +3137,6 @@ namespace MediaTekDocuments.view
             }
         }
 
-        private void dgv_commandesRevue_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-
-        }
-
         private void button7_Click(object sender, EventArgs e)
         {
             DateTime date = DateTime.Now;
@@ -3268,11 +3250,6 @@ namespace MediaTekDocuments.view
                 MessageBox.Show("Numéro introuvable", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 RemplirCommandesRevueListeComplete();
             }
-        }
-
-        private void dgvLivresExemplaires_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void button1_Click(object sender, EventArgs e)

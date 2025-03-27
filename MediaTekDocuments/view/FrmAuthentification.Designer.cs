@@ -115,7 +115,6 @@ namespace MediaTekDocuments.view
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmAuthentification";
             this.Text = "FrmAuthentification";
-            this.Load += new System.EventHandler(this.FrmAuthentification_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

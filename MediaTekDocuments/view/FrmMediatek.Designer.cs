@@ -416,7 +416,6 @@ namespace MediaTekDocuments.view
             this.tabOngletsApplication.SelectedIndex = 0;
             this.tabOngletsApplication.Size = new System.Drawing.Size(883, 949);
             this.tabOngletsApplication.TabIndex = 0;
-            this.tabOngletsApplication.SelectedIndexChanged += new System.EventHandler(this.tabOngletsApplication_SelectedIndexChanged);
             this.tabOngletsApplication.Enter += new System.EventHandler(this.tabCommandesRevues_Enter);
             // 
             // tabLivres
@@ -492,7 +491,6 @@ namespace MediaTekDocuments.view
             this.dgvLivresExemplaires.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLivresExemplaires.Size = new System.Drawing.Size(844, 200);
             this.dgvLivresExemplaires.TabIndex = 4;
-            this.dgvLivresExemplaires.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLivresExemplaires_CellContentClick);
             // 
             // grpLivresInfos
             // 
@@ -2276,7 +2274,7 @@ namespace MediaTekDocuments.view
             // btn_réglée
             // 
             this.btn_réglée.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_réglée.Location = new System.Drawing.Point(8, 633);
+            this.btn_réglée.Location = new System.Drawing.Point(8, 663);
             this.btn_réglée.Name = "btn_réglée";
             this.btn_réglée.Size = new System.Drawing.Size(161, 24);
             this.btn_réglée.TabIndex = 39;
@@ -2743,7 +2741,6 @@ namespace MediaTekDocuments.view
             this.label75.Size = new System.Drawing.Size(191, 13);
             this.label75.TabIndex = 17;
             this.label75.Text = "Saisir un numéro de commande :";
-            this.label75.Click += new System.EventHandler(this.label75_Click);
             // 
             // button3
             // 
@@ -3817,7 +3814,6 @@ namespace MediaTekDocuments.view
             this.dgv_commandesRevue.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_commandesRevue.Size = new System.Drawing.Size(827, 240);
             this.dgv_commandesRevue.TabIndex = 4;
-            this.dgv_commandesRevue.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_commandesRevue_ColumnHeaderMouseClick);
             this.dgv_commandesRevue.SelectionChanged += new System.EventHandler(this.dgv_commandesRevue_SelectionChanged);
             // 
             // FrmMediatek
