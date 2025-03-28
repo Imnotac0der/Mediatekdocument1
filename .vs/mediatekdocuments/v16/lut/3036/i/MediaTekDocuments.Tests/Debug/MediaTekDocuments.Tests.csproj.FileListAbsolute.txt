@@ -1,0 +1,12 @@
+C:\Users\Andréas\Source\Repos\mediatekdocuments\.vs\MediaTekDocuments\v16\lut\0\b\MediaTekDocuments.Tests\bin\Debug\x64\libzstd.dll
+C:\Users\Andréas\Source\Repos\mediatekdocuments\.vs\MediaTekDocuments\v16\lut\0\b\MediaTekDocuments.Tests\bin\Debug\x86\libzstd.dll
+C:\Users\Andréas\Source\Repos\mediatekdocuments\.vs\MediaTekDocuments\v16\lut\0\b\MediaTekDocuments.Tests\bin\Debug\fr\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.resources.dll
+C:\Users\Andréas\Source\Repos\mediatekdocuments\.vs\MediaTekDocuments\v16\lut\0\b\MediaTekDocuments.Tests\bin\Debug\fr\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.resources.dll
+C:\Users\Andréas\Source\Repos\mediatekdocuments\.vs\MediaTekDocuments\v16\lut\0\b\MediaTekDocuments.Tests\bin\Debug\fr\Microsoft.VisualStudio.TestPlatform.TestFramework.resources.dll
+C:\Users\Andréas\Source\Repos\mediatekdocuments\.vs\MediaTekDocuments\v16\lut\0\b\MediaTekDocuments.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Andréas\Source\Repos\mediatekdocuments\.vs\MediaTekDocuments\v16\lut\0\b\MediaTekDocuments.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Andréas\Source\Repos\mediatekdocuments\.vs\MediaTekDocuments\v16\lut\0\b\MediaTekDocuments.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Andréas\Source\Repos\mediatekdocuments\.vs\MediaTekDocuments\v16\lut\0\b\MediaTekDocuments.Tests\bin\Debug\MediaTekDocuments.Tests.dll
+C:\Users\Andréas\Source\Repos\mediatekdocuments\.vs\MediaTekDocuments\v16\lut\0\i\MediaTekDocuments.Tests\Debug\MediaTekDocuments.Tests.csproj.CoreCompileInputs.cache
+C:\Users\Andréas\Source\Repos\mediatekdocuments\.vs\MediaTekDocuments\v16\lut\0\i\MediaTekDocuments.Tests\Debug\MediaTekDocuments.Tests.csproj.CopyComplete
+C:\Users\Andréas\Source\Repos\mediatekdocuments\.vs\MediaTekDocuments\v16\lut\0\i\MediaTekDocuments.Tests\Debug\MediaTekDocuments.Tests.dll
