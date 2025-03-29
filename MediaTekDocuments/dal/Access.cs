@@ -235,9 +235,6 @@ namespace MediaTekDocuments.dal
             return abonnementsAlerte;
         }
 
-
-
-
         /// <summary>
         /// Retourne une commande spécifique à partir de son ID.
         /// </summary>
@@ -290,6 +287,13 @@ namespace MediaTekDocuments.dal
             return result != null && result.Exists(cmd => cmd.IdRevue == id);
         }
 
+        /// <summary>
+        /// Retourne vrai si la Date de Paution est inférieure à Date de Commande et inférieure ou égale à Date de Fin
+        /// </summary>
+        /// <param name="dateCommande"></param>
+        /// <param name="dateFin"></param>
+        /// <param name="dateParution"></param>
+        /// <returns></returns>
         public bool ParutionDansAbonnement(DateTime dateCommande, DateTime dateFin, DateTime? dateParution)
         {
             if (dateParution < dateCommande && dateParution <= dateFin)
@@ -330,8 +334,6 @@ namespace MediaTekDocuments.dal
             }
         }
 
-
-
         /// <summary>
         /// Retourne une commande spécifique à partir de son ID.
         /// </summary>
@@ -358,7 +360,6 @@ namespace MediaTekDocuments.dal
             return result?.Find(cmd => cmd.Id == id);
         }
 
-
         /// <summary>
         /// Retourne toutes les dvd à partir de la BDD
         /// </summary>
@@ -379,7 +380,11 @@ namespace MediaTekDocuments.dal
             return lesRevues;
         }
 
-        //en construction
+        /// <summary>
+        /// Ajoute un LivreDvd
+        /// </summary>
+        /// <param name="livreDvd"></param>
+        /// <returns></returns>
         public bool AjouterLivreDvD(object livreDvd)
         {
             //effectuer une requete API de POST dans la table livredvd avec id
@@ -423,6 +428,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Ajoute un abonnement
+        /// </summary>
+        /// <param name="abonnement"></param>
+        /// <returns></returns>
         public bool AjouterAbonnement(Abonnement abonnement)
         {
             try
@@ -475,6 +485,11 @@ namespace MediaTekDocuments.dal
 
         }
 
+        /// <summary>
+        /// Ajoute un exemplaire
+        /// </summary>
+        /// <param name="exemplaire"></param>
+        /// <returns></returns>
         public bool AjouterExemplaire(Exemplaire exemplaire)
         {
             try
@@ -537,7 +552,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
-
+        /// <summary>
+        /// Ajoute une commande
+        /// </summary>
+        /// <param name="commande"></param>
+        /// <returns></returns>
         public bool AjouterCommande(Commande commande)
         {
             try
@@ -584,6 +603,11 @@ namespace MediaTekDocuments.dal
 
         }
 
+        /// <summary>
+        /// Ajoute une CommandeDocument
+        /// </summary>
+        /// <param name="commandeDocument"></param>
+        /// <returns></returns>
         public bool AjouterCommandeDocument(CommandeDocument commandeDocument)
         {
             try
@@ -628,6 +652,11 @@ namespace MediaTekDocuments.dal
 
         }
 
+        /// <summary>
+        /// Ajoute un Suivi
+        /// </summary>
+        /// <param name="suivi"></param>
+        /// <returns></returns>
         public bool AjouterSuivi(Suivi suivi)
         {
             try
@@ -672,6 +701,11 @@ namespace MediaTekDocuments.dal
 
         }
 
+        /// <summary>
+        /// Ajoute une Revue
+        /// </summary>
+        /// <param name="revue"></param>
+        /// <returns></returns>
         public bool AjouterRevue(object revue)
         {
             //effectuer une requete API de POST dans la table livre avec id, isbn, auteur et collection
@@ -718,6 +752,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Ajoute un Livre
+        /// </summary>
+        /// <param name="livre"></param>
+        /// <returns></returns>
         public bool AjouterLivre(object livre)
         {
             //effectuer une requete API de POST dans la table livre avec id, isbn, auteur et collection
@@ -764,6 +803,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Ajoute un Document
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
         public bool AjouterDocument(object document)
         {
             try
@@ -810,6 +854,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Ajoute un Dvd
+        /// </summary>
+        /// <param name="dvd"></param>
+        /// <returns></returns>
         public bool AjouterDvd(object dvd)
         {
             //effectuer une requete API de POST dans la table livre avec id, isbn, auteur et collection
@@ -858,7 +907,7 @@ namespace MediaTekDocuments.dal
         }
 
         /// <summary>
-        /// 
+        /// Guetter d'un id par le nom d'un Rayon
         /// </summary>
         /// <param name="nomRayon"></param>
         /// <returns></returns>
@@ -879,7 +928,7 @@ namespace MediaTekDocuments.dal
         }
 
         /// <summary>
-        /// 
+        /// Guetter d'un id par le nom d'un Public
         /// </summary>
         /// <param name="nomPublic"></param>
         /// <returns></returns>
@@ -899,6 +948,11 @@ namespace MediaTekDocuments.dal
             return null; // Retourne null si aucun public correspondant n'est trouvé
         }
 
+        /// <summary>
+        /// Guetter d'un id par le nom d'un Genre
+        /// </summary>
+        /// <param name="nomGenre"></param>
+        /// <returns></returns>
         public string GetIdByNameOfGenre(string nomGenre)
         {
             if (classeurGenres != null && classeurGenres.Count > 0)
@@ -915,10 +969,6 @@ namespace MediaTekDocuments.dal
             return null; // Retourne null si aucun genre correspondant n'est trouvé
         }
 
-
-
-
-
         /// <summary>
         /// Retourne les exemplaires d'une revue
         /// </summary>
@@ -931,6 +981,9 @@ namespace MediaTekDocuments.dal
             return lesExemplaires;
         }
 
+        /// <summary>
+        /// Met à jour le dictionnaire
+        /// </summary>
         public void DictionnaireGenre()
         {
             List<Categorie> genres = GetAllGenres();
@@ -941,6 +994,9 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Met à jour le dictionnaire
+        /// </summary>
         public void DictionnairePublic()
         {
             List<Categorie> publics = GetAllPublics();
@@ -952,6 +1008,9 @@ namespace MediaTekDocuments.dal
 
         }
 
+        /// <summary>
+        /// Met à jour le dictionnaire
+        /// </summary>
         public void DictionnaireRayon()
         {
             List<Categorie> rayons = GetAllRayons();
@@ -963,6 +1022,12 @@ namespace MediaTekDocuments.dal
 
         }
 
+        /// <summary>
+        /// Modifie l'etat d'un exemplaire
+        /// </summary>
+        /// <param name="exemplaire"></param>
+        /// <param name="etat"></param>
+        /// <returns></returns>
         public bool ModifierEtatExemplaire(Exemplaire exemplaire, Etat etat)
         {
             try
@@ -999,6 +1064,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Modifie une Revue
+        /// </summary>
+        /// <param name="revue"></param>
+        /// <returns></returns>
         public bool ModifierRevue(Revue revue)
         {
             try
@@ -1042,6 +1112,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Modifie un abonnement
+        /// </summary>
+        /// <param name="abonnement"></param>
+        /// <returns></returns>
         public bool UpdateAbonnement(Abonnement abonnement)
         {
             try
@@ -1083,6 +1158,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Modifie le montant d'une Commande
+        /// </summary>
+        /// <param name="commande"></param>
+        /// <returns></returns>
         public bool UpdateMontantCommande(Commande commande)
         {
             try
@@ -1124,6 +1204,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Modifie un Suivi
+        /// </summary>
+        /// <param name="suivi"></param>
+        /// <returns></returns>
         public bool ModifierSuivi(Suivi suivi)
         {
             try
@@ -1168,6 +1253,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Modifie un Dvd
+        /// </summary>
+        /// <param name="dvd"></param>
+        /// <returns></returns>
         public bool ModifierDvd(Dvd dvd)
         {
             try
@@ -1213,6 +1303,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Modifie un Livre
+        /// </summary>
+        /// <param name="livre"></param>
+        /// <returns></returns>
         public bool ModifierLivre(Livre livre)
         {
             try
@@ -1257,6 +1352,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Modifie un Document
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
         public bool ModifierDocument(Document document)
         {
             try
@@ -1302,6 +1402,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Modifie un LivreDvd
+        /// </summary>
+        /// <param name="livredvd"></param>
+        /// <returns></returns>
         public bool ModifierLivre_DvD(LivreDvd livredvd)
         {
             try
@@ -1406,6 +1511,11 @@ namespace MediaTekDocuments.dal
             return dvdTrouve;
         }
 
+        /// <summary>
+        /// Supprime un Livre
+        /// </summary>
+        /// <param name="livre"></param>
+        /// <returns></returns>
         public bool SupprimerLivre(Livre livre)
         {
             try
@@ -1436,6 +1546,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Supprime un Exemplairee
+        /// </summary>
+        /// <param name="exemplaire"></param>
+        /// <returns></returns>
         public bool SupprimerExemplaire(Exemplaire exemplaire)
         {
             try
@@ -1460,6 +1575,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Supprime une Commande
+        /// </summary>
+        /// <param name="commande"></param>
+        /// <returns></returns>
         public bool SupprimerCommande(Commande commande)
         {
             try
@@ -1490,6 +1610,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Supprime un Abonnement
+        /// </summary>
+        /// <param name="abonnement"></param>
+        /// <returns></returns>
         public bool SupprimerAbonnement(Abonnement abonnement)
         {
             try
@@ -1520,6 +1645,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Supprime une CommandeDocument
+        /// </summary>
+        /// <param name="commandeDocument"></param>
+        /// <returns></returns>
         public bool SupprimerCommandeDocument(CommandeDocument commandeDocument)
         {
             try
@@ -1550,6 +1680,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Supprime un Suivi
+        /// </summary>
+        /// <param name="suivi"></param>
+        /// <returns></returns>
         public bool SupprimerSuivi(Suivi suivi)
         {
             try
@@ -1580,7 +1715,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
-
+        /// <summary>
+        /// Supprime un Dvd
+        /// </summary>
+        /// <param name="dvd"></param>
+        /// <returns></returns>
         public bool SupprimerDvd(Dvd dvd)
         {
             try
@@ -1611,6 +1750,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Supprime une Revue
+        /// </summary>
+        /// <param name="revue"></param>
+        /// <returns></returns>
         public bool SupprimerRevue(Revue revue)
         {
             try
@@ -1641,6 +1785,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Supprime un LivreDvd
+        /// </summary>
+        /// <param name="livre"></param>
+        /// <returns></returns>
         public bool SupprimerLivre_DvD(LivreDvd livre)
         {
             try
@@ -1671,6 +1820,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Supprime un Document
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
         public bool SupprimerDocument(Document document)
         {
             try
@@ -1790,6 +1944,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Guetter d'un Utilisateur par son Login
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         public Utilisateur GetUtilisateur(string login)
         {
             // Création de l'objet JSON à envoyer
@@ -1810,7 +1969,12 @@ namespace MediaTekDocuments.dal
             return result?.Find(u => u.Login.Equals(login, StringComparison.OrdinalIgnoreCase));
         }
 
-
+        /// <summary>
+        /// Vérifie la connexion
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public bool IsConnected(string login, string password)
         {
             try
@@ -1839,6 +2003,11 @@ namespace MediaTekDocuments.dal
             }
         }
 
+        /// <summary>
+        /// Permet d'hasher un mot de passe
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public static string HashPassword(string password)
         {
             using (SHA256 sha256Hash = SHA256.Create())

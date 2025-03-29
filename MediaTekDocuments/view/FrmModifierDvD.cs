@@ -12,14 +12,24 @@ using MediaTekDocuments.controller;
 
 namespace MediaTekDocuments.view
 {
+    /// <summary>
+    /// Formulaire de modification des Dvd
+    /// </summary>
     public partial class FrmModifierDvD : Form
     {
+        // Déclaration des variables
         private Dvd dvd;
         private BindingSource bdgGenres = new BindingSource();
         private BindingSource bdgPublics = new BindingSource();
         private BindingSource bdgRayons = new BindingSource();
         private FrmMediatekController controller = new FrmMediatekController();
         private FrmMediatek frmMediatek;
+
+        /// <summary>
+        /// Initialisation de la fenêtre
+        /// </summary>
+        /// <param name="dvd"></param>
+        /// <param name="frmMediatek"></param>
         public FrmModifierDvD(Dvd dvd, FrmMediatek frmMediatek)
         {
             InitializeComponent();
@@ -59,6 +69,11 @@ namespace MediaTekDocuments.view
             }
         }
 
+        /// <summary>
+        /// Actions au chargement de la fenêtre
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmModifierDvD_Load(object sender, EventArgs e)
         {
             try
@@ -81,8 +96,6 @@ namespace MediaTekDocuments.view
 
             }
 
-
-
             var genres = controller.GetAllGenres();
             var publics = controller.GetAllPublics();
             var rayons = controller.GetAllRayons();
@@ -102,6 +115,11 @@ namespace MediaTekDocuments.view
             SetSelectedComboBox(cb_rayon, dvd.Rayon);
         }
 
+        /// <summary>
+        /// Actions sur le bouton Parcourir
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_parcourir_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -130,6 +148,12 @@ namespace MediaTekDocuments.view
             }
         }
 
+        /// <summary>
+        /// Méthode qui remplit les combobox
+        /// </summary>
+        /// <param name="lesCategories"></param>
+        /// <param name="bdg"></param>
+        /// <param name="cbx"></param>
         public void RemplirCombo(List<Categorie> lesCategories, BindingSource bdg, ComboBox cbx)
         {
             bdg.DataSource = lesCategories;
@@ -140,6 +164,11 @@ namespace MediaTekDocuments.view
             }
         }
 
+        /// <summary>
+        /// Méthode qui permet la modification d'un dvd
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_modifierDvD_Click(object sender, EventArgs e)
         {
 

@@ -6,6 +6,9 @@ namespace MediaTekDocuments.bddmanager
 {
     public static class LoggerHelper
     {
+        /// <summary>
+        /// Permet l'initialisation des logs
+        /// </summary>
         public static void Initialize()
         {
             string logDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "MediatekDocuments", "logs");

@@ -44,3 +44,4 @@ C:\Users\Andréas\Source\Repos\mediatekdocuments\MediaTekDocuments.Tests\obj\Deb
 C:\Users\Andréas\Source\Repos\mediatekdocuments\MediaTekDocuments.Tests\obj\Debug\MediaTekDocuments.Tests.csproj.CopyComplete
 C:\Users\Andréas\Source\Repos\mediatekdocuments\MediaTekDocuments.Tests\obj\Debug\MediaTekDocuments.Tests.dll
 C:\Users\Andréas\Source\Repos\mediatekdocuments\MediaTekDocuments.Tests\obj\Debug\MediaTekDocuments.Tests.pdb
+C:\Users\Andréas\Source\Repos\mediatekdocuments\MediaTekDocuments.Tests\bin\Debug\MediaTekDocuments.xml

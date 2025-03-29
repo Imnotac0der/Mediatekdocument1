@@ -77,3 +77,4 @@ C:\Users\Andréas\Source\Repos\mediatekdocuments\MediaTekDocuments\bin\Debug\x86
 C:\Users\Andréas\Source\Repos\mediatekdocuments\MediaTekDocuments\bin\Debug\Ubiety.Dns.Core.dll
 C:\Users\Andréas\Source\Repos\mediatekdocuments\MediaTekDocuments\bin\Debug\ZstdNet.dll
 C:\Users\Andréas\Source\Repos\mediatekdocuments\MediaTekDocuments\bin\Debug\Ubiety.Dns.Core.xml
+C:\Users\Andréas\Source\Repos\mediatekdocuments\MediaTekDocuments\bin\Debug\MediaTekDocuments.xml

@@ -12,14 +12,24 @@ using MediaTekDocuments.controller;
 
 namespace MediaTekDocuments.view
 {
+    /// <summary>
+    /// Formulaire de modification des Revues
+    /// </summary>
     public partial class FrmModifierRevue : Form
     {
+        // Déclaration des variables
         private Revue revue;
         private BindingSource bdgGenres = new BindingSource();
         private BindingSource bdgPublics = new BindingSource();
         private BindingSource bdgRayons = new BindingSource();
         private FrmMediatekController controller = new FrmMediatekController();
         private FrmMediatek frmMediatek;
+
+        /// <summary>
+        /// Initialisation de la fenêtre
+        /// </summary>
+        /// <param name="revue"></param>
+        /// <param name="frmMediatek"></param>
         public FrmModifierRevue(Revue revue, FrmMediatek frmMediatek)
         {
             InitializeComponent();
@@ -32,6 +42,11 @@ namespace MediaTekDocuments.view
             txbRevueImage.Text = revue.Image;
         }
 
+        /// <summary>
+        /// Actions au chargement de la fenêtre
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmModifierRevue_Load(object sender, EventArgs e)
         {
             try
@@ -50,12 +65,7 @@ namespace MediaTekDocuments.view
                 {
                     MessageBox.Show("Erreur lors du chargement de l'image : " + ex.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-
             }
-
-
-
             var genres = controller.GetAllGenres();
             var publics = controller.GetAllPublics();
             var rayons = controller.GetAllRayons();
@@ -74,6 +84,13 @@ namespace MediaTekDocuments.view
             SetSelectedComboBox(cb_public, revue.Public);
             SetSelectedComboBox(cb_rayon, revue.Rayon);
         }
+
+        /// <summary>
+        /// Méthode qui remplit les combobox
+        /// </summary>
+        /// <param name="lesCategories"></param>
+        /// <param name="bdg"></param>
+        /// <param name="cbx"></param>
         public void RemplirCombo(List<Categorie> lesCategories, BindingSource bdg, ComboBox cbx)
         {
             bdg.DataSource = lesCategories;
@@ -110,6 +127,11 @@ namespace MediaTekDocuments.view
             }
         }
 
+        /// <summary>
+        /// Actions sur le bouton de modification
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_modifierRevue_Click(object sender, EventArgs e)
         {
             ModifierRevue();
@@ -118,6 +140,9 @@ namespace MediaTekDocuments.view
             frmMediatek.RemplirRevuesListeComplete();
         }
 
+        /// <summary>
+        /// Méthode de modification d'une Revue
+        /// </summary>
         private void ModifierRevue()
         {
             // Vérifie que tous les champs sont remplis
@@ -168,6 +193,11 @@ namespace MediaTekDocuments.view
             frmMediatek.RemplirRevuesListeComplete();
         }
 
+        /// <summary>
+        /// Actions sur le bouton Parcourir
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_parcourir_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())

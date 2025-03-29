@@ -3,7 +3,7 @@ namespace MediaTekDocuments.model
 {
     using System;
     /// <summary>
-    /// Classe métier Categorie (réunit les informations des classes Public, Genre et Rayon)
+    /// Classe métier Commande
     /// </summary>
     public class Commande
     {

@@ -14,29 +14,33 @@ using MediaTekDocuments.dal;
 
 namespace MediaTekDocuments.view
 {
+    /// <summary>
+    /// Formulaire d'ajout des Livres
+    /// </summary>
     public partial class FrmAjouterLivre : Form
     {
+        // Création des variables
         private readonly BindingSource bdgGenres = new BindingSource();
         private readonly BindingSource bdgPublics = new BindingSource();
         private readonly BindingSource bdgRayons = new BindingSource();
         private FrmMediatekController controller = new FrmMediatekController();
         private FrmMediatek frmMediatek;
+
+        /// <summary>
+        /// Initialisation de la fenêtre
+        /// </summary>
+        /// <param name="frmMediatek"></param>
         public FrmAjouterLivre(FrmMediatek frmMediatek)
         {
             InitializeComponent();
             this.frmMediatek = frmMediatek;
         }
 
-        private void label59_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pcbLivresImage_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Actions lors du chargement de la fenêtre
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmAjouterLivre_Load(object sender, EventArgs e)
         {
             //remplir le cb_genre de tous les genres
@@ -50,6 +54,12 @@ namespace MediaTekDocuments.view
 
         }
 
+        /// <summary>
+        /// Méthode qui remplit les combobox
+        /// </summary>
+        /// <param name="lesCategories"></param>
+        /// <param name="bdg"></param>
+        /// <param name="cbx"></param>
         public void RemplirCombo(List<Categorie> lesCategories, BindingSource bdg, ComboBox cbx)
         {
             bdg.DataSource = lesCategories;
@@ -91,8 +101,6 @@ namespace MediaTekDocuments.view
                 controller.GetIdByNameOfRayon(cb_rayon.Text), cb_rayon.Text
             );
 
-
-
             // Appelle l'API pour ajouter le livre
             bool succes = controller.AjouterLivre(livre);
 
@@ -107,17 +115,23 @@ namespace MediaTekDocuments.view
             }
         }
 
-
+        /// <summary>
+        /// Bouton qui appelle différentes méthodes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_ajouterLivre_Click(object sender, EventArgs e)
         {         
             AjouterLivre();
             frmMediatek.lesLivres = controller.GetAllLivres();
             frmMediatek.RemplirLivresListeComplete();
-
-
-
         }
 
+        /// <summary>
+        /// Actions sur le bouton Parcourir
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_parcourir_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
