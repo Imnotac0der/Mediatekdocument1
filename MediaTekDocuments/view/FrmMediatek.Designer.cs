@@ -894,6 +894,7 @@ namespace MediaTekDocuments.view
             this.dgvLivresListe.Size = new System.Drawing.Size(844, 200);
             this.dgvLivresListe.TabIndex = 4;
             this.dgvLivresListe.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvLivresListe_ColumnHeaderMouseClick);
+            this.dgvLivresListe.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvLivresListe_DataError);
             this.dgvLivresListe.SelectionChanged += new System.EventHandler(this.DgvLivresListe_SelectionChanged);
             // 
             // label6
@@ -1393,6 +1394,7 @@ namespace MediaTekDocuments.view
             this.dgvDvdListe.Size = new System.Drawing.Size(844, 200);
             this.dgvDvdListe.TabIndex = 4;
             this.dgvDvdListe.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvDvdListe_ColumnHeaderMouseClick);
+            this.dgvDvdListe.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvDvdListe_DataError);
             this.dgvDvdListe.SelectionChanged += new System.EventHandler(this.dgvDvdListe_SelectionChanged);
             // 
             // label42
@@ -1808,6 +1810,7 @@ namespace MediaTekDocuments.view
             this.dgvRevuesListe.Size = new System.Drawing.Size(844, 200);
             this.dgvRevuesListe.TabIndex = 4;
             this.dgvRevuesListe.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvRevuesListe_ColumnHeaderMouseClick);
+            this.dgvRevuesListe.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvRevuesListe_DataError);
             this.dgvRevuesListe.SelectionChanged += new System.EventHandler(this.dgvRevuesListe_SelectionChanged);
             // 
             // label34

@@ -198,8 +198,8 @@ namespace MediaTekDocuments.view
                 var exemplaires = controller.GetExemplairesDvd(dvd.Id);
                 var etats = controller.GetAllEtats();
 
-                Console.WriteLine($"📘 Dvd sélectionné : {dvd.Id} ({dvd.Titre})");
-                Console.WriteLine("📚 Exemplaires associés :");
+                Console.WriteLine($"Dvd sélectionné : {dvd.Id} ({dvd.Titre})");
+                Console.WriteLine("Exemplaires associés :");
                 foreach (var ex in exemplaires)
                 {
                     Console.WriteLine($"   - Numéro : {ex.Numero}, Date achat : {ex.DateAchat:yyyy-MM-dd}, État : {ex.IdEtat}");
@@ -1801,66 +1801,75 @@ namespace MediaTekDocuments.view
                 return;
             }
 
-            // Demander une confirmation avant de supprimer
-            DialogResult result = MessageBox.Show(
+            // Vérifier qu'un document n'est pas rataché à un exemplaire avant de passer à la suite
+            if (controller.GetExemplaireById(txbLivresNumero.Text) == null)
+            {
+
+                // Demander une confirmation avant de supprimer
+                DialogResult result = MessageBox.Show(
                 "Voulez-vous vraiment supprimer ce livre ? Cette action est irréversible.",
                 "Confirmation",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning
             );
 
-            Livre livre = new Livre(
-            txbLivresNumero.Text,
-            txbLivresTitre.Text,
-            txbLivresImage.Text,
-            txbLivresIsbn.Text,
-            txbLivresAuteur.Text,
-            txbLivresCollection.Text,
+                Livre livre = new Livre(
+                txbLivresNumero.Text,
+                txbLivresTitre.Text,
+                txbLivresImage.Text,
+                txbLivresIsbn.Text,
+                txbLivresAuteur.Text,
+                txbLivresCollection.Text,
 
-            // Récupérer l'ID du genre en fonction du libellé
-            controller.GetIdByNameOfGenre(txbLivresGenre.Text),
-            txbLivresGenre.Text,  // libellé du genre
+                // Récupérer l'ID du genre en fonction du libellé
+                controller.GetIdByNameOfGenre(txbLivresGenre.Text),
+                txbLivresGenre.Text,  // libellé du genre
 
-            // Récupérer l'ID du public en fonction du libellé
-            controller.GetIdByNameOfPublic(txbLivresPublic.Text),
-            txbLivresPublic.Text,  // libellé du public
+                // Récupérer l'ID du public en fonction du libellé
+                controller.GetIdByNameOfPublic(txbLivresPublic.Text),
+                txbLivresPublic.Text,  // libellé du public
 
-            // Récupérer l'ID du rayon en fonction du libellé
-            controller.GetIdByNameOfRayon(txbLivresRayon.Text),
-            txbLivresRayon.Text   // libellé du rayon
-            );
-
-            Document document = new Document(
-            txbLivresNumero.Text,
-            txbLivresTitre.Text,
-            txbLivresImage.Text,
-            // Récupérer l'ID du genre en fonction du libellé
-            controller.GetIdByNameOfGenre(txbLivresGenre.Text),
-            txbLivresGenre.Text,  // libellé du genre
-
-            // Récupérer l'ID du public en fonction du libellé
-            controller.GetIdByNameOfPublic(txbLivresPublic.Text),
-            txbLivresPublic.Text,  // libellé du public
-
-            // Récupérer l'ID du rayon en fonction du libellé
-            controller.GetIdByNameOfRayon(txbLivresRayon.Text),
-            txbLivresRayon.Text   // libellé du rayon
+                // Récupérer l'ID du rayon en fonction du libellé
+                controller.GetIdByNameOfRayon(txbLivresRayon.Text),
+                txbLivresRayon.Text   // libellé du rayon
                 );
 
-            if (result == DialogResult.Yes)
-            {
-                bool success = controller.SupprimerLivre(livre, document); // Appel de la méthode de suppression
+                Document document = new Document(
+                txbLivresNumero.Text,
+                txbLivresTitre.Text,
+                txbLivresImage.Text,
+                // Récupérer l'ID du genre en fonction du libellé
+                controller.GetIdByNameOfGenre(txbLivresGenre.Text),
+                txbLivresGenre.Text,  // libellé du genre
 
-                if (success)
+                // Récupérer l'ID du public en fonction du libellé
+                controller.GetIdByNameOfPublic(txbLivresPublic.Text),
+                txbLivresPublic.Text,  // libellé du public
+
+                // Récupérer l'ID du rayon en fonction du libellé
+                controller.GetIdByNameOfRayon(txbLivresRayon.Text),
+                txbLivresRayon.Text   // libellé du rayon
+                    );
+
+                if (result == DialogResult.Yes)
                 {
-                    Console.WriteLine("✅ Suppression réussie.");
-                    MessageBox.Show("Le livre a bien été supprimé.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    bool success = controller.SupprimerLivre(livre, document); // Appel de la méthode de suppression
+
+                    if (success)
+                    {
+                        Console.WriteLine("Suppression réussie.");
+                        MessageBox.Show("Le livre a bien été supprimé.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Erreur lors de la suppression.");
+                        MessageBox.Show("Erreur lors de la suppression du livre.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                else
-                {
-                    Console.WriteLine("❌ Erreur lors de la suppression.");
-                    MessageBox.Show("Erreur lors de la suppression du livre.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            }
+            else
+            {
+                MessageBox.Show("Ce livre ne peut pas être supprimé car il est rattaché à un exemplaire.");
             }
 
             lesLivres = controller.GetAllLivres();
@@ -1963,64 +1972,73 @@ namespace MediaTekDocuments.view
                 return;
             }
 
-            // Demander une confirmation avant de supprimer
-            DialogResult result = MessageBox.Show(
+            // Vérifier qu'un document n'est pas rataché à un exemplaire avant de passer à la suite
+            if (controller.GetExemplaireById(txbRevuesNumero.Text) == null)
+            {
+
+                // Demander une confirmation avant de supprimer
+                DialogResult result = MessageBox.Show(
                 "Voulez-vous vraiment supprimer cette revue ? Cette action est irréversible.",
                 "Confirmation",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning
             );
 
-            Revue revue = new Revue(
+                Revue revue = new Revue(
+                    txbRevuesNumero.Text,
+                    txbRevuesTitre.Text,
+                    txbRevuesImage.Text,
+                    // Récupérer l'ID du genre en fonction du libellé
+                    controller.GetIdByNameOfGenre(txbLivresGenre.Text),
+                    txbRevuesGenre.Text,  // libellé du genre
+
+                    // Récupérer l'ID du public en fonction du libellé
+                    controller.GetIdByNameOfPublic(txbLivresPublic.Text),
+                    txbRevuesPublic.Text,  // libellé du public
+
+                    // Récupérer l'ID du rayon en fonction du libellé
+                    controller.GetIdByNameOfRayon(txbLivresRayon.Text),
+                    txbRevuesRayon.Text,   // libellé du rayon
+                    txbRevuesPeriodicite.Text,
+                    int.Parse(txbRevuesDateMiseADispo.Text)
+                    );
+
+                Document document = new Document(
                 txbRevuesNumero.Text,
                 txbRevuesTitre.Text,
                 txbRevuesImage.Text,
                 // Récupérer l'ID du genre en fonction du libellé
-                controller.GetIdByNameOfGenre(txbLivresGenre.Text),
+                controller.GetIdByNameOfGenre(txbRevuesGenre.Text),
                 txbRevuesGenre.Text,  // libellé du genre
 
                 // Récupérer l'ID du public en fonction du libellé
-                controller.GetIdByNameOfPublic(txbLivresPublic.Text),
+                controller.GetIdByNameOfPublic(txbRevuesPublic.Text),
                 txbRevuesPublic.Text,  // libellé du public
 
                 // Récupérer l'ID du rayon en fonction du libellé
-                controller.GetIdByNameOfRayon(txbLivresRayon.Text),
-                txbRevuesRayon.Text,   // libellé du rayon
-                txbRevuesPeriodicite.Text,
-                int.Parse(txbRevuesDateMiseADispo.Text)
-                );
+                controller.GetIdByNameOfRayon(txbRevuesRayon.Text),
+                txbRevuesRayon.Text   // libellé du rayon
+                    );
 
-            Document document = new Document(
-            txbRevuesNumero.Text,
-            txbRevuesTitre.Text,
-            txbRevuesImage.Text,
-            // Récupérer l'ID du genre en fonction du libellé
-            controller.GetIdByNameOfGenre(txbRevuesGenre.Text),
-            txbRevuesGenre.Text,  // libellé du genre
+                if (result == DialogResult.Yes)
+                {
+                    bool success = controller.SupprimerRevue(revue, document); // Appel de la méthode de suppression
 
-            // Récupérer l'ID du public en fonction du libellé
-            controller.GetIdByNameOfPublic(txbRevuesPublic.Text),
-            txbRevuesPublic.Text,  // libellé du public
-
-            // Récupérer l'ID du rayon en fonction du libellé
-            controller.GetIdByNameOfRayon(txbRevuesRayon.Text),
-            txbRevuesRayon.Text   // libellé du rayon
-                );
-
-            if (result == DialogResult.Yes)
+                    if (success)
+                    {
+                        Console.WriteLine("✅ Suppression réussie.");
+                        MessageBox.Show("Le livre a bien été supprimé.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        Console.WriteLine("❌ Erreur lors de la suppression.");
+                        MessageBox.Show("Erreur lors de la suppression du livre.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
             {
-                bool success = controller.SupprimerRevue(revue, document); // Appel de la méthode de suppression
-
-                if (success)
-                {
-                    Console.WriteLine("✅ Suppression réussie.");
-                    MessageBox.Show("Le livre a bien été supprimé.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    Console.WriteLine("❌ Erreur lors de la suppression.");
-                    MessageBox.Show("Erreur lors de la suppression du livre.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Cette revue ne peut pas être supprimé car elle est rattachée à un exemplaire.");
             }
 
             lesRevues = controller.GetAllRevues();
@@ -2040,67 +2058,75 @@ namespace MediaTekDocuments.view
                 return;
             }
 
-            // Demander une confirmation avant de supprimer
-            DialogResult result = MessageBox.Show(
-                "Voulez-vous vraiment supprimer ce livre ? Cette action est irréversible.",
-                "Confirmation",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning
-            );
-
-            Dvd dvd = new Dvd(
-            txbDvdNumero.Text,
-            txbDvdTitre.Text,
-            txbDvdImage.Text,
-            int.Parse(txbDvdDuree.Text),
-            txbDvdRealisateur.Text,
-            txbDvdSynopsis.Text,
-
-
-            // Récupérer l'ID du genre en fonction du libellé
-            controller.GetIdByNameOfGenre(txbDvdGenre.Text),
-            txbDvdGenre.Text,  // libellé du genre
-
-            // Récupérer l'ID du public en fonction du libellé
-            controller.GetIdByNameOfPublic(txbDvdPublic.Text),
-            txbDvdPublic.Text,  // libellé du public
-
-            // Récupérer l'ID du rayon en fonction du libellé
-            controller.GetIdByNameOfRayon(txbDvdRayon.Text),
-            txbDvdRayon.Text   // libellé du rayon
-            );
-
-            Document document = new Document(
-            txbDvdNumero.Text,
-            txbDvdTitre.Text,
-            txbDvdImage.Text,
-            // Récupérer l'ID du genre en fonction du libellé
-            controller.GetIdByNameOfGenre(txbDvdGenre.Text),
-            txbDvdGenre.Text,  // libellé du genre
-
-            // Récupérer l'ID du public en fonction du libellé
-            controller.GetIdByNameOfPublic(txbDvdPublic.Text),
-            txbDvdPublic.Text,  // libellé du public
-
-            // Récupérer l'ID du rayon en fonction du libellé
-            controller.GetIdByNameOfRayon(txbDvdRayon.Text),
-            txbDvdRayon.Text   // libellé du rayon
+            // Vérifier qu'un document n'est pas rataché à un exemplaire avant de passer à la suite
+            if (controller.GetExemplaireById(txbDvdNumero.Text) == null)
+            {
+                // Demander une confirmation avant de supprimer
+                DialogResult result = MessageBox.Show(
+                    "Voulez-vous vraiment supprimer ce dvd ? Cette action est irréversible.",
+                    "Confirmation",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
                 );
 
-            if (result == DialogResult.Yes)
-            {
-                bool success = controller.SupprimerDvd(dvd, document); // Appel de la méthode de suppression
+                Dvd dvd = new Dvd(
+                txbDvdNumero.Text,
+                txbDvdTitre.Text,
+                txbDvdImage.Text,
+                int.Parse(txbDvdDuree.Text),
+                txbDvdRealisateur.Text,
+                txbDvdSynopsis.Text,
 
-                if (success)
+
+                // Récupérer l'ID du genre en fonction du libellé
+                controller.GetIdByNameOfGenre(txbDvdGenre.Text),
+                txbDvdGenre.Text,  // libellé du genre
+
+                // Récupérer l'ID du public en fonction du libellé
+                controller.GetIdByNameOfPublic(txbDvdPublic.Text),
+                txbDvdPublic.Text,  // libellé du public
+
+                // Récupérer l'ID du rayon en fonction du libellé
+                controller.GetIdByNameOfRayon(txbDvdRayon.Text),
+                txbDvdRayon.Text   // libellé du rayon
+                );
+
+                Document document = new Document(
+                txbDvdNumero.Text,
+                txbDvdTitre.Text,
+                txbDvdImage.Text,
+                // Récupérer l'ID du genre en fonction du libellé
+                controller.GetIdByNameOfGenre(txbDvdGenre.Text),
+                txbDvdGenre.Text,  // libellé du genre
+
+                // Récupérer l'ID du public en fonction du libellé
+                controller.GetIdByNameOfPublic(txbDvdPublic.Text),
+                txbDvdPublic.Text,  // libellé du public
+
+                // Récupérer l'ID du rayon en fonction du libellé
+                controller.GetIdByNameOfRayon(txbDvdRayon.Text),
+                txbDvdRayon.Text   // libellé du rayon
+                    );
+
+                if (result == DialogResult.Yes)
                 {
-                    Console.WriteLine("✅ Suppression réussie.");
-                    MessageBox.Show("Le livre a bien été supprimé.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    bool success = controller.SupprimerDvd(dvd, document); // Appel de la méthode de suppression
+
+                    if (success)
+                    {
+                        Console.WriteLine("✅ Suppression réussie.");
+                        MessageBox.Show("Le dvd a bien été supprimé.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        Console.WriteLine("❌ Erreur lors de la suppression.");
+                        MessageBox.Show("Erreur lors de la suppression du dvd.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                else
-                {
-                    Console.WriteLine("❌ Erreur lors de la suppression.");
-                    MessageBox.Show("Erreur lors de la suppression du livre.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+            }
+            else
+            {
+                MessageBox.Show("Ce dvd ne peut pas être supprimé car il est rattaché à un exemplaire.");
             }
 
             lesDvd = controller.GetAllDvd();
@@ -3687,6 +3713,45 @@ namespace MediaTekDocuments.view
                 {
                     MessageBox.Show("Veuillez sélectionner un exemplaire.");
                 }
+            }
+        }
+
+        /// <summary>
+        /// Permet d'ignore un exception récurrente du dgv
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvDvdListe_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            if (e.Exception is IndexOutOfRangeException)
+            {
+                e.ThrowException = false; // Ignore l'exception
+            }
+        }
+
+        /// <summary>
+        /// Permet d'ignore un exception récurrente du dgv
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvLivresListe_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            if (e.Exception is IndexOutOfRangeException)
+            {
+                e.ThrowException = false; // Ignore l'exception
+            }
+        }
+
+        /// <summary>
+        /// Permet d'ignore un exception récurrente du dgv
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvRevuesListe_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            if (e.Exception is IndexOutOfRangeException)
+            {
+                e.ThrowException = false; // Ignore l'exception
             }
         }
     }

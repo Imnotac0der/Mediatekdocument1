@@ -2117,6 +2117,27 @@
             <param name="sender"></param>
             <param name="e"></param>
         </member>
+        <member name="M:MediaTekDocuments.view.FrmMediatek.dgvDvdListe_DataError(System.Object,System.Windows.Forms.DataGridViewDataErrorEventArgs)">
+            <summary>
+            Permet d'ignore un exception récurrente du dgv
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:MediaTekDocuments.view.FrmMediatek.dgvLivresListe_DataError(System.Object,System.Windows.Forms.DataGridViewDataErrorEventArgs)">
+            <summary>
+            Permet d'ignore un exception récurrente du dgv
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:MediaTekDocuments.view.FrmMediatek.dgvRevuesListe_DataError(System.Object,System.Windows.Forms.DataGridViewDataErrorEventArgs)">
+            <summary>
+            Permet d'ignore un exception récurrente du dgv
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
         <member name="F:MediaTekDocuments.view.FrmMediatek.components">
             <summary>
             Variable nécessaire au concepteur.
