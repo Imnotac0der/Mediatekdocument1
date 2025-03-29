@@ -2789,6 +2789,7 @@ namespace MediaTekDocuments.view
             this.dgv_commandesLivres.Size = new System.Drawing.Size(827, 240);
             this.dgv_commandesLivres.TabIndex = 4;
             this.dgv_commandesLivres.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_commandesLivres_ColumnHeaderMouseClick);
+            this.dgv_commandesLivres.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgv_commandesLivres_DataError);
             this.dgv_commandesLivres.SelectionChanged += new System.EventHandler(this.dgv_commandesLivres_SelectionChanged);
             // 
             // tabCommandesDvd
@@ -3335,6 +3336,7 @@ namespace MediaTekDocuments.view
             this.dgv_commandesDvd.Size = new System.Drawing.Size(827, 240);
             this.dgv_commandesDvd.TabIndex = 4;
             this.dgv_commandesDvd.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_commandesDvd_ColumnHeaderMouseClick);
+            this.dgv_commandesDvd.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgv_commandesDvd_DataError);
             this.dgv_commandesDvd.SelectionChanged += new System.EventHandler(this.dgv_commandesDvd_SelectionChanged);
             // 
             // tabCommandesRevues
@@ -3756,6 +3758,7 @@ namespace MediaTekDocuments.view
             this.button10.TabIndex = 19;
             this.button10.Text = "Rechercher";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // txbCRevueNumRechercheCom
             // 
@@ -3817,6 +3820,7 @@ namespace MediaTekDocuments.view
             this.dgv_commandesRevue.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_commandesRevue.Size = new System.Drawing.Size(827, 240);
             this.dgv_commandesRevue.TabIndex = 4;
+            this.dgv_commandesRevue.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgv_commandesRevue_DataError);
             this.dgv_commandesRevue.SelectionChanged += new System.EventHandler(this.dgv_commandesRevue_SelectionChanged);
             // 
             // FrmMediatek

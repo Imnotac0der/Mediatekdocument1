@@ -2328,7 +2328,7 @@ namespace MediaTekDocuments.view
 
             // Recherche de la commande par numéro de document
             CommandeEntiere commandeTrouvee = listeActuelle
-                .Find(x => x.IdLivreDvd.ToString().Equals(txbCLivresNumRechercheCom.Text));
+                .Find(x => x.Id.ToString().Equals(txbCLivresNumRechercheCom.Text));
 
             if (commandeTrouvee != null)
             {
@@ -3752,6 +3752,99 @@ namespace MediaTekDocuments.view
             if (e.Exception is IndexOutOfRangeException)
             {
                 e.ThrowException = false; // Ignore l'exception
+            }
+        }
+
+        /// <summary>
+        /// Permet d'ignore un exception récurrente du dgv
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgv_commandesLivres_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            if (e.Exception is IndexOutOfRangeException)
+            {
+                e.ThrowException = false; // Ignore l'exception
+            }
+        }
+
+        /// <summary>
+        /// Permet d'ignore un exception récurrente du dgv
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgv_commandesDvd_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            if (e.Exception is IndexOutOfRangeException)
+            {
+                e.ThrowException = false; // Ignore l'exception
+            }
+        }
+
+        /// <summary>
+        /// Permet d'ignore un exception récurrente du dgv
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgv_commandesRevue_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            if (e.Exception is IndexOutOfRangeException)
+            {
+                e.ThrowException = false; // Ignore l'exception
+            }
+        }
+
+        /// <summary>
+        /// Actions sur le bouton de recherche
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button10_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txbCRevueNumRechercheCom.Text))
+            {
+                // Si la recherche est vide, on recharge toute la liste
+                RemplirCommandesRevueListeComplete();
+                return;
+            }
+
+            // Récupérer la liste actuelle affichée dans le DataGridView
+            List<Abonnement> listeActuelle = bdgCommandesRevueListe.DataSource as List<Abonnement>;
+
+            if (listeActuelle == null || listeActuelle.Count == 0)
+            {
+                MessageBox.Show("Aucune commande disponible.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Recherche de la commande par numéro de document
+            Abonnement abonnementTrouve = listeActuelle
+                .Find(x => x.Id.ToString().Equals(txbCRevueNumRechercheCom.Text));
+
+            if (abonnementTrouve != null)
+            {
+                // Créer une liste contenant uniquement la commande trouvée
+                List<Abonnement> commandesFiltrees = new List<Abonnement>() { abonnementTrouve };
+
+                // Mettre à jour l'affichage avec la liste filtrée
+                bdgCommandesRevueListe.DataSource = commandesFiltrees;
+                dgv_commandesRevue.DataSource = bdgCommandesRevueListe;
+
+                // Sélectionner la première ligne
+                if (dgv_commandesRevue.Rows.Count > 0)
+                {
+                    dgv_commandesRevue.ClearSelection();
+                    dgv_commandesRevue.Rows[0].Selected = true;
+                    dgv_commandesRevue.CurrentCell = dgv_commandesRevue.Rows[0].Cells[0];
+                }
+
+                // Mettre à jour les informations du livre sélectionné
+                dgv_commandesRevue_SelectionChanged(null, null);
+            }
+            else
+            {
+                MessageBox.Show("Numéro introuvable", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                RemplirCommandesRevueListeComplete();
             }
         }
     }

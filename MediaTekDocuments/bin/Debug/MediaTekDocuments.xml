@@ -2138,6 +2138,34 @@
             <param name="sender"></param>
             <param name="e"></param>
         </member>
+        <member name="M:MediaTekDocuments.view.FrmMediatek.dgv_commandesLivres_DataError(System.Object,System.Windows.Forms.DataGridViewDataErrorEventArgs)">
+            <summary>
+            Permet d'ignore un exception récurrente du dgv
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:MediaTekDocuments.view.FrmMediatek.dgv_commandesDvd_DataError(System.Object,System.Windows.Forms.DataGridViewDataErrorEventArgs)">
+            <summary>
+            Permet d'ignore un exception récurrente du dgv
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:MediaTekDocuments.view.FrmMediatek.dgv_commandesRevue_DataError(System.Object,System.Windows.Forms.DataGridViewDataErrorEventArgs)">
+            <summary>
+            Permet d'ignore un exception récurrente du dgv
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:MediaTekDocuments.view.FrmMediatek.button10_Click(System.Object,System.EventArgs)">
+            <summary>
+            Actions sur le bouton de recherche
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
         <member name="F:MediaTekDocuments.view.FrmMediatek.components">
             <summary>
             Variable nécessaire au concepteur.
