@@ -295,7 +295,7 @@ namespace MediaTekDocuments.view
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FrmAjouterLivre";
-            this.Text = "Ajouter";
+            this.Text = "Ajouter un livre";
             this.Load += new System.EventHandler(this.FrmAjouterLivre_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

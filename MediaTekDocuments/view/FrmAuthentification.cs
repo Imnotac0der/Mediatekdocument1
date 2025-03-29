@@ -46,8 +46,14 @@ namespace MediaTekDocuments.view
                         // Stocker l'utilisateur
                         Utilisateur utilisateurConnecte = controller.GetUtilisateur(txbLogin.Text);
 
+                        if(utilisateurConnecte == null)
+                        {
+                            lblError.Text = "Identifiants incorrects.";
+                            lblError.Visible = true;
+                        }
+
                         // Vérifier le bon id de service
-                        if(utilisateurConnecte.IdService == "00001" || utilisateurConnecte.IdService == "00002")
+                        else if(utilisateurConnecte.IdService == "00001" || utilisateurConnecte.IdService == "00002")
                         {
                             // Si 00001, rediriger vers la fenêtre Abonnements
                             if(utilisateurConnecte.IdService == "00001")

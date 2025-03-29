@@ -294,7 +294,7 @@ namespace MediaTekDocuments.view
             this.ClientSize = new System.Drawing.Size(875, 313);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmAjouterDvD";
-            this.Text = "FrmAjouterDvD";
+            this.Text = "Ajouter un dvd";
             this.Load += new System.EventHandler(this.FrmAjouterDvD_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

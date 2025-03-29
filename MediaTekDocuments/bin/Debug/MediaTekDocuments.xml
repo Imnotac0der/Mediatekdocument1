@@ -527,7 +527,7 @@
         </member>
         <member name="M:MediaTekDocuments.dal.Access.ParutionDansAbonnement(System.DateTime,System.DateTime,System.Nullable{System.DateTime})">
             <summary>
-            Retourne vrai si la Date de Paution est inférieure à Date de Commande et inférieure ou égale à Date de Fin
+            Retourne vrai si la Date de Paution est supérieure à Date de Commande et inférieure ou égale à Date de Fin
             </summary>
             <param name="dateCommande"></param>
             <param name="dateFin"></param>

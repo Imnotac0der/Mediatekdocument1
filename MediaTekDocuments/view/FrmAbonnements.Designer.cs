@@ -30,12 +30,12 @@ namespace MediaTekDocuments.view
         private void InitializeComponent()
         {
             this.grpAbonnements = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnLivresAnnulRayons = new System.Windows.Forms.Button();
             this.btnlivresAnnulPublics = new System.Windows.Forms.Button();
             this.btnLivresAnnulGenres = new System.Windows.Forms.Button();
             this.dgvAbonnementsListe = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.grpAbonnements.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAbonnementsListe)).BeginInit();
             this.SuspendLayout();
@@ -54,6 +54,26 @@ namespace MediaTekDocuments.view
             this.grpAbonnements.TabIndex = 19;
             this.grpAbonnements.TabStop = false;
             this.grpAbonnements.Text = "Expiration des abonnements";
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(540, 227);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(79, 22);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "Fermer";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 232);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(302, 13);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Attention, ces abonnements expieront dans moins de 30 jours !";
             // 
             // btnLivresAnnulRayons
             // 
@@ -100,26 +120,6 @@ namespace MediaTekDocuments.view
             this.dgvAbonnementsListe.SelectionChanged += new System.EventHandler(this.dgvAbonnementsListe_SelectionChanged);
             this.dgvAbonnementsListe.Enter += new System.EventHandler(this.dgvLivresListe_Enter);
             // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(540, 227);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(79, 22);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Fermer";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 232);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(302, 13);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "Attention, ces abonnements expieront dans moins de 30 jours !";
-            // 
             // FrmAbonnements
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -129,7 +129,7 @@ namespace MediaTekDocuments.view
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmAbonnements";
-            this.Text = "FrmAbonnements";
+            this.Text = "Abonnements";
             this.grpAbonnements.ResumeLayout(false);
             this.grpAbonnements.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAbonnementsListe)).EndInit();

@@ -3124,8 +3124,6 @@ namespace MediaTekDocuments.view
                     {
                         controller.AjouterExemplaire(exemplaire);
                     }
-                    // Appelle l'API pour ajouter le livre
-                    bool succes = controller.AjouterExemplaire(exemplaire);
 
                     Suivi suivi = new Suivi(
                             txbCDvdNumeroCom.Text,

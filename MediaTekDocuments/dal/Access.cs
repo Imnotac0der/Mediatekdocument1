@@ -288,7 +288,7 @@ namespace MediaTekDocuments.dal
         }
 
         /// <summary>
-        /// Retourne vrai si la Date de Paution est inférieure à Date de Commande et inférieure ou égale à Date de Fin
+        /// Retourne vrai si la Date de Paution est supérieure à Date de Commande et inférieure ou égale à Date de Fin
         /// </summary>
         /// <param name="dateCommande"></param>
         /// <param name="dateFin"></param>
@@ -296,7 +296,7 @@ namespace MediaTekDocuments.dal
         /// <returns></returns>
         public bool ParutionDansAbonnement(DateTime dateCommande, DateTime dateFin, DateTime? dateParution)
         {
-            if (dateParution < dateCommande && dateParution <= dateFin)
+            if (dateParution > dateCommande && dateParution <= dateFin)
             {
                 return true;
             }

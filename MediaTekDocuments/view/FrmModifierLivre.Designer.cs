@@ -294,7 +294,7 @@ namespace MediaTekDocuments.view
             this.ClientSize = new System.Drawing.Size(874, 279);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmModifierLivre";
-            this.Text = "FrmModifierLivre";
+            this.Text = "Modifier un livre";
             this.Load += new System.EventHandler(this.FrmModifierLivre_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

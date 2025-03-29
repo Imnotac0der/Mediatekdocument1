@@ -2274,7 +2274,7 @@ namespace MediaTekDocuments.view
             // btn_réglée
             // 
             this.btn_réglée.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_réglée.Location = new System.Drawing.Point(8, 663);
+            this.btn_réglée.Location = new System.Drawing.Point(8, 633);
             this.btn_réglée.Name = "btn_réglée";
             this.btn_réglée.Size = new System.Drawing.Size(161, 24);
             this.btn_réglée.TabIndex = 39;
@@ -2817,7 +2817,7 @@ namespace MediaTekDocuments.view
             // btn_régléeDvd
             // 
             this.btn_régléeDvd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_régléeDvd.Location = new System.Drawing.Point(10, 633);
+            this.btn_régléeDvd.Location = new System.Drawing.Point(3, 687);
             this.btn_régléeDvd.Name = "btn_régléeDvd";
             this.btn_régléeDvd.Size = new System.Drawing.Size(161, 24);
             this.btn_régléeDvd.TabIndex = 45;

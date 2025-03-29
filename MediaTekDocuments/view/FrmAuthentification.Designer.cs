@@ -34,8 +34,8 @@ namespace MediaTekDocuments.view
             this.label2 = new System.Windows.Forms.Label();
             this.txbPwd = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.lblError = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,16 +87,6 @@ namespace MediaTekDocuments.view
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Connexion";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(271, 77);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Se connecter";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // lblError
             // 
             this.lblError.AutoSize = true;
@@ -107,6 +97,16 @@ namespace MediaTekDocuments.view
             this.lblError.TabIndex = 5;
             this.lblError.Visible = false;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(271, 77);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Se connecter";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FrmAuthentification
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -114,7 +114,7 @@ namespace MediaTekDocuments.view
             this.ClientSize = new System.Drawing.Size(417, 130);
             this.Controls.Add(this.groupBox1);
             this.Name = "FrmAuthentification";
-            this.Text = "FrmAuthentification";
+            this.Text = "Se connecter";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
