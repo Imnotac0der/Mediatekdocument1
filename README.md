@@ -1,8 +1,8 @@
 # MediatekDocuments
-Cette application permet de gérer les documents (livres, DVD, revues) d'une médiathèque. Elle a été codée en C# sous Visual Studio 2019. C'est une application de bureau, prévue d'être installée sur plusieurs postes accédant à la même base de données.<br>
-L'application exploite une API REST pour accéder à la BDD MySQL. Des explications sont données plus loin, ainsi que le lien de récupération.
+MediatekDocuments est une application de bureau permettant de gérer les documents d'une médiathèque (livres, DVD, revues), d'en assurer le suivi, les commandes et les abonnements. Elle est développée en C# sous Visual Studio.
+L'application fonctionne avec une API REST déployée sur Internet, assurant l'accès distant à une base de données MySQL. L'application est installable via un setup exécutable disponible sur le dépôt GitHub.
 ## Présentation
-Actuellement l'application est partiellement codée. Voici les fonctionnalités actuellement opérationnelles : recherches et affichage d'informations sur les documents de la médiathèque (livres, DVD, revues), réception de nouveaux numéros de revues.<br>
+L'application propose plusieurs onglets accessibles selon le service de l'utilisateur depuis une seule fenêtre, chacun correspondant à une fonctionnalité principale de gestion documentaire.<br>
 ![img1](https://github.com/CNED-SLAM/MediaTekDocuments/assets/100127886/9b5a4c1b-6914-4455-94bf-fec24adba3ec)
 <br>L'application ne comporte qu'une seule fenêtre divisée en plusieurs onglets.
 ## Les différents onglets
@@ -46,6 +46,24 @@ Il est possible alors de réceptionner une nouvelle parution en saisissant son n
 Le clic sur "Valider la réception" va permettre d'ajouter un tuple dans la table Exemplaire de la BDD. La parution correspondante apparaitra alors automatiquement dans la liste des parutions et les zones de la partie "Nouvelle parution réceptionnée pour cette revue" seront réinitialisées.<br>
 Si le numéro de la parution existe déjà, il n’est pas ajouté et un message est affiché.
 ![img3](https://github.com/CNED-SLAM/MediaTekDocuments/assets/100127886/225e10f2-406a-4b5e-bfa9-368d45456056)
+### Onglet 5 : Commandes de livres
+Cet onglet est accesible uniquement aux utilisateurs du service Administratif. Il répertorie toutes les commandes de livres et permet leur création ainsi que leur suppression.<br>
+Lors de l'ajout d'une commande, le libellé de cette dernière est automatiquement initié à la valeur "en cours".<br>
+L'administrateur a la possibilité de changer ce libellé de suivi :
+- la commande tarde : "relancée"
+- la commande est livrée : "livrée"
+- la commande est réglée : "réglée"
+Lorsqu'une commande est réceptionnée, elle ne peut plus être supprimée. Des exemplaires sont automatiquement créé.
+### Onglet 6 : Commandes de dvd
+Cet onglet est accesible uniquement aux utilisateurs du service Administratif. Il répertorie toutes les commandes de dvd et permet leur création ainsi que leur suppression.<br>
+Lors de l'ajout d'une commande, le libellé de cette dernière est automatiquement initié à la valeur "en cours".<br>
+L'administrateur a la possibilité de changer ce libellé de suivi :
+- la commande tarde : "relancée"
+- la commande est livrée : "livrée"
+- la commande est réglée : "réglée"
+Lorsqu'une commande est réceptionnée, elle ne peut plus être supprimée. Des exemplaires sont automatiquement créé.
+### Onglet 7 : Commandes de revues
+Cet onglet est accesible uniquement aux utilisateurs du service Administratif. Il répertorie toutes les abonnements aux revues et permet leur création ainsi que leur suppression.<br>
 ## La base de données
 La base de données 'mediatek86 ' est au format MySQL.<br>
 Voici sa structure :<br>
