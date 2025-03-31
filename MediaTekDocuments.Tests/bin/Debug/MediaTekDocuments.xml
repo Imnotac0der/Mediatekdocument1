@@ -163,7 +163,7 @@
             <summary>
             récupère les exemplaires d'une revue
             </summary>
-            <param name="idDocument">id de la revue concernée</param>
+            <param name="idDocument">id de la revue concernée</param>F
             <returns>Liste d'objets Exemplaire</returns>
         </member>
         <member name="M:MediaTekDocuments.controller.FrmMediatekController.GetExemplairesLivre(System.String)">
@@ -527,7 +527,7 @@
         </member>
         <member name="M:MediaTekDocuments.dal.Access.ParutionDansAbonnement(System.DateTime,System.DateTime,System.Nullable{System.DateTime})">
             <summary>
-            Retourne vrai si la Date de Paution est inférieure à Date de Commande et inférieure ou égale à Date de Fin
+            Retourne vrai si la Date de Paution est supérieure à Date de Commande et inférieure ou égale à Date de Fin
             </summary>
             <param name="dateCommande"></param>
             <param name="dateFin"></param>
@@ -2113,6 +2113,55 @@
         <member name="M:MediaTekDocuments.view.FrmMediatek.button13_Click(System.Object,System.EventArgs)">
             <summary>
             Actions sur le bouton de suppression d'un exemplaire
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:MediaTekDocuments.view.FrmMediatek.dgvDvdListe_DataError(System.Object,System.Windows.Forms.DataGridViewDataErrorEventArgs)">
+            <summary>
+            Permet d'ignore un exception récurrente du dgv
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:MediaTekDocuments.view.FrmMediatek.dgvLivresListe_DataError(System.Object,System.Windows.Forms.DataGridViewDataErrorEventArgs)">
+            <summary>
+            Permet d'ignore un exception récurrente du dgv
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:MediaTekDocuments.view.FrmMediatek.dgvRevuesListe_DataError(System.Object,System.Windows.Forms.DataGridViewDataErrorEventArgs)">
+            <summary>
+            Permet d'ignore un exception récurrente du dgv
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:MediaTekDocuments.view.FrmMediatek.dgv_commandesLivres_DataError(System.Object,System.Windows.Forms.DataGridViewDataErrorEventArgs)">
+            <summary>
+            Permet d'ignore un exception récurrente du dgv
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:MediaTekDocuments.view.FrmMediatek.dgv_commandesDvd_DataError(System.Object,System.Windows.Forms.DataGridViewDataErrorEventArgs)">
+            <summary>
+            Permet d'ignore un exception récurrente du dgv
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:MediaTekDocuments.view.FrmMediatek.dgv_commandesRevue_DataError(System.Object,System.Windows.Forms.DataGridViewDataErrorEventArgs)">
+            <summary>
+            Permet d'ignore un exception récurrente du dgv
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:MediaTekDocuments.view.FrmMediatek.button10_Click(System.Object,System.EventArgs)">
+            <summary>
+            Actions sur le bouton de recherche
             </summary>
             <param name="sender"></param>
             <param name="e"></param>

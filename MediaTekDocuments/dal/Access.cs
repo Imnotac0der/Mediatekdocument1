@@ -25,7 +25,7 @@ namespace MediaTekDocuments.dal
         /// <summary>
         /// adresse de l'API
         /// </summary>
-        private static readonly string uriApi = "http://localhost/rest_mediatekdocuments/";
+        private static readonly string uriApi = "https://apimediatekdocuments.com/rest_mediatekdocuments/";
         /// <summary>
         /// nom de connexion à la bdd
         /// </summary>
@@ -90,17 +90,15 @@ namespace MediaTekDocuments.dal
                     .WriteTo.File("logs/log.txt")
                     .CreateLogger();
 
-                connectionString = GetConnectionStringByName(connectionName);
-                Manager = BddManager.GetInstance(connectionString);
-
-                string authenticationString = "admin:adminpwd";
+                string authenticationString = "admin:bonjour";
                 api = ApiRest.GetInstance(uriApi, authenticationString);
             }
             catch (Exception e)
             {
-                Log.Fatal("Access.Access catch connectionString={0} erreur={1}", connectionString, e.Message);
+                Log.Fatal("Access.Access catch erreur={0}", e.Message);
                 Environment.Exit(0);
             }
+
         }
 
         /// <summary>

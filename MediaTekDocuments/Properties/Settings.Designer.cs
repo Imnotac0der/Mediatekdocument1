@@ -22,14 +22,15 @@ namespace MediaTekDocuments.Properties {
                 return defaultInstance;
             }
         }
-        
+
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("server=localhost;user id=mediatekuser;database=mediatekdocuments")]
-        public string mediatek86ConnectionString {
-            get {
-                return ((string)(this["mediatek86ConnectionString"]));
+        [global::System.Configuration.DefaultSettingValueAttribute("admin:bonjour")]
+        public string AuthApi
+        {
+            get
+            {
+                return ((string)(this["AuthApi"]));
             }
         }
     }
