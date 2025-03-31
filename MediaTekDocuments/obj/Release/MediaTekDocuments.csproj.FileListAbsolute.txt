@@ -71,3 +71,4 @@ C:\Users\Andréas\Source\Repos\mediatekdocuments\MediaTekDocuments\obj\Release\M
 C:\Users\Andréas\Source\Repos\mediatekdocuments\MediaTekDocuments\obj\Release\MediaTekDocuments.csproj.CopyComplete
 C:\Users\Andréas\Source\Repos\mediatekdocuments\MediaTekDocuments\obj\Release\MediaTekDocuments.exe
 C:\Users\Andréas\Source\Repos\mediatekdocuments\MediaTekDocuments\obj\Release\MediaTekDocuments.pdb
+C:\Users\Andréas\Source\Repos\mediatekdocuments\MediaTekDocuments\obj\Release\MediaTekDocuments.csproj.AssemblyReference.cache
