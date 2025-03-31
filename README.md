@@ -54,6 +54,7 @@ L'administrateur a la possibilité de changer ce libellé de suivi :
 - la commande est livrée : "livrée"
 - la commande est réglée : "réglée"
 Lorsqu'une commande est réceptionnée, elle ne peut plus être supprimée. Des exemplaires sont automatiquement créé.
+![image](https://github.com/user-attachments/assets/8193a992-f1db-49a5-8cb7-6105e75edecb)
 ### Onglet 6 : Commandes de dvd
 Cet onglet est accesible uniquement aux utilisateurs du service Administratif. Il répertorie toutes les commandes de dvd et permet leur création ainsi que leur suppression.<br>
 Lors de l'ajout d'une commande, le libellé de cette dernière est automatiquement initié à la valeur "en cours".<br>
@@ -62,8 +63,10 @@ L'administrateur a la possibilité de changer ce libellé de suivi :
 - la commande est livrée : "livrée"
 - la commande est réglée : "réglée"
 Lorsqu'une commande est réceptionnée, elle ne peut plus être supprimée. Des exemplaires sont automatiquement créé.
+![image](https://github.com/user-attachments/assets/3eb50555-fb18-43a1-ad76-36d16a352220)
 ### Onglet 7 : Commandes de revues
 Cet onglet est accesible uniquement aux utilisateurs du service Administratif. Il répertorie toutes les abonnements aux revues et permet leur création ainsi que leur suppression.<br>
+![image](https://github.com/user-attachments/assets/3865d031-4797-4935-9c8e-fe0b6454edf5)
 ## La base de données
 La base de données 'mediatek86 ' est au format MySQL.<br>
 Voici sa structure :<br>
