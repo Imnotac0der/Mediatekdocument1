@@ -98,5 +98,5 @@ Configuration via .htaccess et config.inc.php.
 ## Installation de l'application
 Rendez-vous sur le dépôt GitHub.<br>
 Accédez à la section Release.<br>
-Téléchargez le fichier setup (.exe).<br>
+Téléchargez le fichier setup (.msi).<br>
 Lancez l'installation.<br>
